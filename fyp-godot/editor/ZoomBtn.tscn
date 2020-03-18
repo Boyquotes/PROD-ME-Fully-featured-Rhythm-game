@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://editor/ZoomBtn.gd" type="Script" id=1]
+
+[node name="ZoomBtn" type="VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 77.0
+margin_bottom = 20.0
+
+[node name="ZoomInBtn" type="Button" parent="HBoxContainer"]
+margin_right = 37.0
+margin_bottom = 20.0
+text = " In  "
+
+[node name="ZoomOutBtn" type="Button" parent="HBoxContainer"]
+margin_left = 41.0
+margin_right = 77.0
+margin_bottom = 20.0
+text = "Out"
+
+[node name="Label" type="Label" parent="."]
+margin_top = 24.0
+margin_right = 77.0
+margin_bottom = 55.0
+text = "Zoom
+"
+align = 1
+[connection signal="pressed" from="HBoxContainer/ZoomInBtn" to="." method="_on_ZoomInBtn_pressed"]
+[connection signal="pressed" from="HBoxContainer/ZoomOutBtn" to="." method="_on_ZoomOutBtn_pressed"]

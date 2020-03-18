@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://menu/Sour Cherry - Utada Hikaru(DnB).ogg" type="AudioStream" id=1]
+[ext_resource path="res://visualiser_round.gd" type="Script" id=2]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+volume_db = -10.0
+autoplay = true
+__meta__ = {
+"_edit_horizontal_guides_": [ 400.0 ],
+"_edit_vertical_guides_": [ 640.0 ]
+}
+
+[node name="visualiser_round" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2( 640, 360 )
+script = ExtResource( 2 )

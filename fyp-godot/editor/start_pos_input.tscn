@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://editor/start_pos_input.gd" type="Script" id=1]
+
+[node name="start_pos_input" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.029
+anchor_right = 0.029
+margin_left = 170.88
+margin_top = 16.0
+margin_right = 255.88
+margin_bottom = 58.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer"]
+margin_right = 85.0
+margin_bottom = 24.0
+max_value = 1e+17
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 85.0
+margin_bottom = 42.0
+text = "Start position"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="VBoxContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]
