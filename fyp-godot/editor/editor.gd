@@ -11,10 +11,12 @@ var audio_file_name = ""
 var audio_load_thread = Thread.new()
 var audio_loaded = false
 
-var sample_duration_in_sec
+var map_start_pos = 0
 var track_length
 var track_speed
 var track_tempo = 130
+var map_info_was_saved = false
+var pending_export = false
 
 var waveform_length
 var waveform_scale
@@ -28,6 +30,7 @@ var prev_scale_ratio
 var bar_size
 var bars_count
 var quarter_time_in_sec
+var sample_duration_in_sec
 
 var window_scroll_size = 0
 var pending_wscroll_update = false
@@ -36,16 +39,29 @@ var window_scroll_last_val = 0
 var window_scroll_and_cursor_d = 0
 var window_scroll_last_pos = 0
 
+var tracks = []
+var active_note
+var active_track
+
+onready  var map_info_dialog = get_node("Popup_cont/MapInfo")
 onready  var load_audio_dialog = get_node("Popup_cont/loadAudio")
-onready var err_notice_dialog = get_node("Popup_cont/notice")
+onready  var err_notice_dialog = get_node("Popup_cont/notice")
+onready  var save_map_dialog = get_node("Popup_cont/SaveMap")
+onready  var import_map_dialog = get_node("Popup_cont/ImportMap")
 
 onready  var stream_player = get_node("AudioStreamPlayer")
+onready  var visualizer_cont = get_node("CenterContainer/Visualizer")
 
 onready  var load_audio_btn = get_node("MarginCont_file/file_btn_cont/import_btn")
 onready  var tempo_btn = get_node("MarginCont_timers/bpm_input")
 onready  var play_btn = get_node("MarginCont_play/play_btn_cont/play_btn")
 onready  var scale_up_btn = get_node("MarginCont_zoom/ZoomBtn/HBoxContainer/ZoomInBtn")
 onready  var scale_down_btn = get_node("MarginCont_zoom/ZoomBtn/HBoxContainer/ZoomOutBtn")
+onready  var save_map_btn = get_node("MarginCont_file/file_btn_cont/save_btn")
+onready  var import_map_btn = get_node("MarginCont_file/file_btn_cont/load_btn")
+
+onready  var set_start_input = get_node("MarginCont_timers/start_pos_input")
+
 onready  var waveform_c = get_node("ScrollContainer/VBoxContainer/Waveform")
 onready  var waveform_n = waveform_c.get_node("AudioWaveform")
 onready  var window_scroll = get_node("ScrollContainer")
@@ -54,6 +70,11 @@ onready  var cursor_c = get_node("ScrollContainer/VBoxContainer/Waveform/CursorC
 onready  var cursor_static = cursor_c.get_node("CursorStatic")
 onready  var cursor_playback = cursor_c.get_node("CursorPlayback")
 onready  var cursor_slider = cursor_c.get_node("HSlider")
+
+var track_scn = preload("res://editor/track.tscn")
+onready  var tracks_c = get_node("ScrollContainer/VBoxContainer/TracksCont")
+
+var editor_scn_path = "res://editor/editor.tscn"
 
 #Setting up ready initialization on startup
 func _ready():
@@ -66,12 +87,15 @@ func _ready():
 	window_scroll_size = window_scroll.get_minimum_size().x
 	update_controls()
 	setup_editor_dir()
+	
+	update_last_file_path(EDITOR_C.last_file_path)
 
 func _process(delta):
 	if pending_wscroll_update:
 		window_scroll.set_h_scroll(window_scroll_size)
 		pending_wscroll_update = false
 	
+	tracks_c.set_custom_minimum_size(Vector2(OS.get_window_size().x - 200, 100))
 	cursor_c.set_position(Vector2(cursor_c.get_position().x, window_scroll.get_v_scroll()))
 	
 	if tempo_update_timeout > 0:
@@ -87,12 +111,12 @@ func _process(delta):
 		var dd = scroll_val - cursor_val
 	
 		set_params()
+		redraw_map()
 		
 		var scale = waveform_length / old_waveform_length
 		cursor_slider.set_value(cursor_slider.get_value() * scale)
 		window_scroll.set_h_scroll(cursor_slider.get_value() + dd)
 		cursor_static.set_position(Vector2(cursor_slider.get_value(), cursor_static.get_position().y))
-		
 		tempo_update_in_process = false
 		
 	window_scroll_last_val = window_scroll.get_h_scroll()
@@ -107,6 +131,7 @@ func _process(delta):
 	if is_playing and is_follow_playing:
 		if cursor_playback.get_position().x >= window_scroll.get_size().x * 0.5:
 			window_scroll.set_h_scroll((int(cursor_playback.get_position().x) - int(window_scroll.get_size().x * 0.5)))
+	
 	
 #Update last known file path
 func update_last_file_path(file_path):
@@ -136,11 +161,6 @@ func set_params():
 	waveform_scale = track_length / float(EDITOR_C.WAVEFORM_W)
 	waveform_length = track_length
 	
-	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
-	waveform_n.set_full_size(waveform_c.get_size())
-	waveform_n.set_viewport_rect(Rect2(Vector2(), Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
-	waveform_n.set_custom_minimum_size(waveform_c.get_size())
-	
 	print("track_speed:", track_speed)
 	print("w scale:", waveform_scale)
 	print("t len:", track_length)
@@ -162,6 +182,142 @@ func set_params():
 	prev_scale_ratio = 1
 	scale_to(0)
 
+func load_waveform():
+	waveform_n.set_stream(stream)
+	
+
+func play():
+	if is_playing:
+		is_playing = false
+		visualizer_cont.hide()
+		stream_player.stop()
+	else :
+		visualizer_cont.show()
+		is_playing = true
+		unset_active_note()
+		unset_active_track()
+		var t = cursor_slider.get_value() / track_speed
+		t = t / scale_ratio
+		stream_player.play(t)
+		
+	play_btn.set_playing(is_playing)
+
+func cursor_focus():
+	if is_playing:
+		play()
+		
+	window_scroll.set_h_scroll(cursor_static.get_position().x - EDITOR_C.CURSOR_FOCUS_OFFSET)
+	
+func scale_to(dir):
+	print("****** scale_to ******")
+	
+	if pending_wscroll_update:
+		return 
+	var value = dir * (waveform_scale / 10.0)
+	ui_scale += value
+	var curr_scale = waveform_scale + ui_scale
+	scale_ratio = curr_scale / waveform_scale
+	
+	if scale_ratio <= 0 or str(scale_ratio) == "0":
+		scale_ratio = 0.1
+		ui_scale -= value
+		print("scale_ratio:", scale_ratio)
+		return 
+
+	var scale_d = scale_ratio / prev_scale_ratio
+		
+	print("scale to:", dir)
+	print("scale_ratio:", scale_ratio)
+	print("scale_d:", scale_d)
+	print("prev scale: ", prev_scale_ratio)
+	print("ui_scale/curr_Scale: ", ui_scale/curr_scale)
+	
+	var cursor_val = cursor_slider.get_value()
+	var scroll_val = window_scroll.get_h_scroll()
+	var d = cursor_val - scroll_val
+	cursor_slider.set_max(waveform_length * scale_ratio)
+	cursor_slider.set_custom_minimum_size(Vector2(waveform_length * scale_ratio, 256))
+	cursor_slider.set_value(cursor_val * scale_d)
+
+	var scaled_size = Vector2(waveform_length * scale_ratio, EDITOR_C.WAVEFORM_H)
+
+	waveform_c.set_custom_minimum_size(scaled_size)
+	waveform_c.set_size(scaled_size)
+
+	waveform_n.set_custom_minimum_size(scaled_size)
+	waveform_n.set_size(scaled_size)
+
+	waveform_n.set_full_size(scaled_size)
+	waveform_n.set_scale_ratio(scale_ratio)
+
+	cursor_playback.speed_scale = scale_ratio
+	
+	
+	window_scroll_size = cursor_slider.get_value() - d
+	pending_wscroll_update = true
+
+	
+	for t in tracks:
+		t.update_scale(scale_ratio)
+	
+	prev_scale_ratio = scale_ratio
+
+	print("scale updated!")
+
+func _on_HSlider_value_changed(value):
+	print("slider val changed:", value)
+	
+	if tempo_update_in_process:
+		return 
+		
+	cursor_static.set_position(Vector2(value, cursor_static.get_position().y))
+	
+	if is_playing:
+		var t = cursor_slider.get_value() / track_speed
+		t = t / scale_ratio
+		stream_player.play(t)
+	
+func _on_tempo_changed():
+	print("_on_tempo_changed:")
+	
+	if track_tempo != tempo_btn.get_tempo():
+		track_tempo = tempo_btn.get_tempo()
+		tempo_update_timeout = 1.0
+		print("tempo updated to", track_tempo)
+
+func _on_ZoomBtn_down():
+	scale_to( - 1)
+	
+func _on_ZoomBtn_up():
+	scale_to(1)
+
+func _input(e):
+	if not audio_loaded:return 
+	if e.is_action_pressed("editor_play"):
+		is_follow_playing = false
+		play_btn.grab_focus()
+		if e.is_action_pressed("editor_follow_play"):
+			if not is_playing:
+				is_follow_playing = true
+	elif e.is_action_pressed("editor_scale_up"):
+		scale_up_btn.grab_focus()
+		scale_to(1)
+	elif e.is_action_pressed("editor_scale_down"):
+		scale_down_btn.grab_focus()
+		scale_to( - 1)
+	elif e.is_action_pressed("editor_cursor_focus"):
+		cursor_focus()
+		
+func _on_ScrollContainer_minimum_size_changed():
+	var d = cursor_slider.get_value() - window_scroll.get_h_scroll()
+	
+	if d > window_size and not pending_wscroll_update:
+		window_scroll_size = window_scroll.get_h_scroll() + d
+		pending_wscroll_update = true
+
+func _on_ScrollContainer_resized():
+	waveform_n.set_viewport_rect(Rect2(Vector2(window_scroll_last_val, 0), Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
+	
 #Show any ok notices
 func show_notice(_text):
 	err_notice_dialog.set_text("error")
@@ -237,12 +393,13 @@ func load_audio(input_file_path):
 
 	stream = load_ogg(ogg_file_path)
 	print("FILE:", ogg_file_path, stream)
-	if not is_audio_loaded(stream):return 
+	if not is_audio_loaded(stream):
+		return 
 	stream_player.set_stream(stream)
 
-	load_waveform(stream)
+	load_waveform()
 	set_params()
-
+	
 	audio_loaded = true
 	update_controls()
 	
@@ -259,6 +416,7 @@ func update_controls():
 		scale_down_btn.set_disabled(false)
 		tempo_btn.set_disabled(false)
 		window_scroll.show()
+		add_track()
 	elif not audio_loaded:
 		load_audio_btn.set_disabled(false)
 		play_btn.set_disabled(true)
@@ -268,117 +426,182 @@ func update_controls():
 		
 		window_scroll.hide()
 		
-func play():
-	if is_playing:
-		is_playing = false
-		stream_player.stop()
-	else :
-		is_playing = true
-		var t = cursor_slider.get_value() / track_speed
-		t = t / scale_ratio
-		stream_player.play()
-		
-	play_btn.set_playing(is_playing)
-
-
 func _on_play_btn_pressed():
 	play()
+
+func _on_AudioStreamPlayer_finished():
+	if is_playing:
+		play()
 	
-func load_waveform(stream):
-	waveform_n.set_stream(stream)
+func update_cursor_length():
+	var offset = 0
+	for t in tracks:offset += t.get_custom_minimum_size().y
+	cursor_static.set_length_offset(offset)
+	cursor_playback.set_length_offset(offset)
 	
-func _on_HSlider_value_changed(value):
-	print("slider val changed:", value)
-
-func _on_tempo_changed():
-	print("_on_tempo_changed:")
+func add_track():
+	for i in 4:
+		var t = track_scn.instance()
+		t.set_info()
+		t.setup(bars_count)
+		t.set_position(Vector2(0, tracks.size() + 1 * (EDITOR_C.CELL_HEIGHT + EDITOR_C.TRACK_DISTANCE)))
+		t.set_start_position(map_start_pos)
+		tracks_c.call_deferred("add_child", t)
+		tracks.append(t)
+		set_active_track(t)
+		update_cursor_length()
+		scale_to(0)
 	
-	if track_tempo != tempo_btn.get_tempo():
-		track_tempo = tempo_btn.get_tempo()
-		tempo_update_timeout = 1.0
-		print("tempo updated to", track_tempo)
+func _on_start_pos_input_value_changed(value):
+	map_start_pos = value
+	for t in tracks:
+		t.set_start_position(map_start_pos)
 
+func set_active_track(track):
+	print("SET ACTIVE:", track)
+	if active_track != null:active_track.set_active(false)
+	active_track = track
+	active_track.set_active(true)
 
-func scale_to(dir):
-	print("****** scale_to ******")
-	
-	if pending_wscroll_update:
-		return 
-	var value = dir * (waveform_scale / 10.0)
-	ui_scale += value
-	var curr_scale = waveform_scale + ui_scale
-	scale_ratio = curr_scale / waveform_scale
-	
-	if scale_ratio <= 0 or str(scale_ratio) == "0":
-		scale_ratio = 0.1
-		ui_scale -= value
-		print("scale_ratio:", scale_ratio)
-		return 
+func unset_active_track():
+	if active_track != null:active_track.set_active(false)
+	active_track = null
 
-	var scale_d = scale_ratio / prev_scale_ratio
-		
-	print("scale to:", dir)
-	print("scale_ratio:", scale_ratio)
-	print("scale_d:", scale_d)
+func grab_cursor_slider_focus(e):
+	return 
+# warning-ignore:unreachable_code
+	if e.global_pos.y <= cursor_c.get_global_position().y + cursor_c.get_size().y + 10.0:
+		if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT):
+			cursor_slider_pressed = e.pressed
+			if cursor_slider_pressed:
+				cursor_slider.set_value(e.global_pos.x - cursor_slider.get_global_position().x)
+				
+		if e is InputEventMouseMotion:
+			if cursor_slider_pressed:
+					cursor_slider.set_value(e.global_pos.x - cursor_slider.get_global_position().x)
+		return true
+	return false
 
-	var cursor_val = cursor_slider.get_value()
-	var scroll_val = window_scroll.get_h_scroll()
-	var d = cursor_val - scroll_val
+func set_active_note(note):
+	if active_note != null:active_note.set_active(false)
+	active_note = note
+	active_note.set_active(true)
+	set_active_track(note.bar.track)
 
-	cursor_slider.set_max(waveform_length * scale_ratio)
-	cursor_slider.set_custom_minimum_size(Vector2(waveform_length * scale_ratio, 256))
-	cursor_slider.set_value(cursor_val * scale_d)
-
-	var scaled_size = Vector2(waveform_length * scale_ratio, EDITOR_C.WAVEFORM_H)
-
-	waveform_c.set_custom_minimum_size(scaled_size)
-	waveform_c.set_size(scaled_size)
-
-	waveform_n.set_custom_minimum_size(scaled_size)
-	waveform_n.set_size(scaled_size)
-
-	waveform_n.set_full_size(scaled_size)
-	waveform_n.set_scale_ratio(scale_ratio)
-
-	cursor_playback.speed_scale = scale_ratio
-	
-	window_scroll_size = cursor_slider.get_value() - d
-	pending_wscroll_update = true
-	
-	prev_scale_ratio = scale_ratio
-
-	print("scale updated!")
-	
-func _on_ZoomBtn_down():
-	scale_to( - 1)
-	
-func _on_ZoomBtn_up():
-	scale_to(1)
+func unset_active_note():
+	if active_note != null:active_note.set_active(false)
+	active_note = null
 
 func _on_editor_minimum_size_changed():
 	pass
 
-func _input(e):
-	if not audio_loaded:return 
-	if e.is_action_pressed("editor_play"):
-		is_follow_playing = false
-		play_btn.grab_focus()
-		if e.is_action_pressed("editor_follow_play"):
-			if not is_playing:
-				is_follow_playing = true
-	elif e.is_action_pressed("editor_scale_up"):
-		scale_up_btn.grab_focus()
-		scale_to(1)
-	elif e.is_action_pressed("editor_scale_down"):
-		scale_down_btn.grab_focus()
-		scale_to( - 1)
-		
-func _on_ScrollContainer_minimum_size_changed():
-	var d = cursor_slider.get_value() - window_scroll.get_h_scroll()
-	
-	if d > window_size and not pending_wscroll_update:
-		window_scroll_size = window_scroll.get_h_scroll() + d
-		pending_wscroll_update = true
+func redraw_map():
+	for t in tracks:
+		t.setup(bars_count, true)
 
-func _on_ScrollContainer_resized():
-	waveform_n.set_viewport_rect(Rect2(Vector2(window_scroll_last_val, 0), Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
+
+func _on_SaveMapDialog_file_selected(path):
+	export_data(path)
+
+
+func _on_MapInfo_map_info_saved():
+	map_info_was_saved = true
+	if pending_export:
+		save_map_dialog.set_current_path(EDITOR_C.last_file_path)
+		save_map_dialog.set_current_file("")
+		save_map_dialog.popup()
+		
+
+
+func _on_save_btn_pressed():
+	if not map_info_was_saved:
+		map_info_dialog.popup()
+		
+		pending_export = true
+	else :
+		save_map_dialog.set_current_path(EDITOR_C.last_file_path)
+		save_map_dialog.set_current_file("")
+		save_map_dialog.popup()
+
+func export_data(file_path):
+	var tracks_data = []
+	for t in tracks:
+		tracks_data.append(t.get_data())
+	
+	var data = {
+		audio = map_info_dialog.audio_info, 
+		creator = map_info_dialog.creator, 
+		date = get_curr_date(), 
+		tempo = track_tempo, 
+		start_pos = map_start_pos * EDITOR_C.CELL_EXPORT_SCALE, 
+		tracks = tracks_data, 
+	}
+
+	Utils.write_json_file(file_path, data)
+	update_last_file_path(file_path)
+	print("data exported")
+
+func get_curr_date():
+	var today = OS.get_date()
+	return ("%s-%02d-%02d" % [today.year, today.month, today.day])
+
+
+func _on_load_btn_pressed():
+	import_map_dialog.set_current_path(EDITOR_C.last_file_path)
+	import_map_dialog.set_current_file("")
+	import_map_dialog.popup()
+	
+	
+
+
+func _on_ImportMap_file_selected(path):
+	import_data(path)
+
+func import_data(path):
+	var data = Utils.read_json_file(path)
+	if not data:
+		return
+		
+	track_tempo = int(data.tempo)
+	tempo_btn.set_tempo(track_tempo)
+
+# warning-ignore:integer_division
+	map_start_pos = int(int(data.start_pos) / EDITOR_C.CELL_EXPORT_SCALE)
+	set_start_input.input.set_value(map_start_pos)
+
+	map_info_dialog.set_data(data.creator, data.audio)
+	map_info_was_saved = false
+	pending_export = false
+
+	clear_tracks()
+	set_params()
+	scale_to(0)
+	
+	var y = EDITOR_C.CELL_HEIGHT + EDITOR_C.TRACK_DISTANCE
+	for track_data in data.tracks:
+		var t = track_scn.instance()
+		t.set_data(track_data)
+		t.set_position(Vector2(0, y))
+		t.set_start_position(map_start_pos)
+		tracks_c.add_child(t)
+		tracks.append(t)
+		y += t.get_height()
+
+	update_cursor_length()
+	update_last_file_path(path)
+	print("data imported")
+	print("new track data:", tracks)
+
+func destroy_track(track):
+	if active_track == track:
+		active_track = null
+	tracks_c.remove_child(track)
+	tracks.erase(track)
+	update_cursor_length()
+	
+func clear_tracks():
+	var tracksize = tracks.size()
+	for t in tracksize:
+		print("track ", t ," removed")
+		print("track ", tracks[0] ," removed")
+		destroy_track(tracks[0])

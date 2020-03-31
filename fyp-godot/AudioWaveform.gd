@@ -7,14 +7,14 @@ var full_size = Vector2()
 var viewport_rect = Rect2()
 var last_scroll_val = 0
 var last_scale_val = 1
-var updated = false
+var updated = true
 
 var preview_len
-const COLOR = Color(0.68, 1, 0.18, 1)
+const COLOR = Color("#ffffff")
 var step = 2
 
 func _ready():
-	update()
+	pass
 	
 func set_stream(stream):
 	loaded = false
@@ -59,8 +59,9 @@ func _draw_wavefrom():
 			var ofs_n = (i + step) * preview_len / full_size.x
 			var maxi = preview.get_max(ofs, ofs_n) * 0.5 + 0.5
 			var mini = preview.get_min(ofs, ofs_n) * 0.5 + 0.5
+			
 			draw_line(Vector2(i + 1, viewport_size.y * 0.05 + mini * viewport_size.y * 0.9), Vector2(i + 1, viewport_size.y * 0.05 + maxi * viewport_size.y * 0.9), COLOR, step, false)
-
+			
 func _on_preview_updated(_e):
 	if not loaded:
 		loaded = true

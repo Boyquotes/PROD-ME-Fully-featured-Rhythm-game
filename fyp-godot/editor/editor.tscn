@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://theme/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -9,8 +9,21 @@
 [ext_resource path="res://audio.ogg" type="AudioStream" id=7]
 [ext_resource path="res://editor/Cursor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://editor/ZoomBtn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://editor/MapInfo.tscn" type="PackedScene" id=10]
+[ext_resource path="res://visualiser_round.gd" type="Script" id=11]
+[ext_resource path="res://editor/Box.gd" type="Script" id=12]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="ImageTexture" id=1]
+
+[sub_resource type="ImageTexture" id=2]
+
+[sub_resource type="ImageTexture" id=3]
+
+[sub_resource type="ImageTexture" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="editor" type="Control"]
 anchor_right = 1.0
@@ -23,108 +36,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginCont_file" type="MarginContainer" parent="."]
-margin_left = 15.0
-margin_top = 17.0
-margin_right = 143.0
-margin_bottom = 45.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.886
+margin_left = 946.0
+margin_top = 74.0
+margin_right = -314.0
+margin_bottom = -537.92
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="file_btn_cont" type="HBoxContainer" parent="MarginCont_file"]
-margin_right = 164.0
-margin_bottom = 31.0
+[node name="Box" type="Node2D" parent="CenterContainer"]
+script = ExtResource( 12 )
 
-[node name="import_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
-margin_right = 64.0
-margin_bottom = 31.0
-text = "Import"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Visualizer" type="Node2D" parent="CenterContainer"]
+position = Vector2( 0.1, 0 )
+script = ExtResource( 11 )
+definition = 256
+total_w = 256
+total_h = 60
+rotate = false
 
-[node name="save_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
-margin_left = 68.0
-margin_right = 115.0
-margin_bottom = 31.0
-text = "Save"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="load_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
-margin_left = 119.0
-margin_right = 164.0
-margin_bottom = 31.0
-text = "load"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginCont_play" type="MarginContainer" parent="."]
-margin_left = 266.0
-margin_top = 17.0
-margin_right = 304.0
-margin_bottom = 45.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="play_btn_cont" type="HBoxContainer" parent="MarginCont_play"]
-margin_right = 38.0
-margin_bottom = 31.0
-
-[node name="play_btn" type="Button" parent="MarginCont_play/play_btn_cont"]
-margin_right = 12.0
-margin_bottom = 31.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginCont_zoom" type="MarginContainer" parent="."]
-margin_left = 345.0
-margin_top = 18.0
-margin_right = 427.0
-margin_bottom = 131.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ZoomBtn" parent="MarginCont_zoom" instance=ExtResource( 9 )]
-margin_right = 82.0
-margin_bottom = 113.0
-
-[node name="MarginCont_timers" type="MarginContainer" parent="."]
-margin_left = 449.0
-margin_right = 449.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="start_pos_input" parent="MarginCont_timers" instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 40.0
-
-[node name="bpm_input" parent="MarginCont_timers" instance=ExtResource( 5 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 40.0
+[node name="Outline" type="Node2D" parent="CenterContainer"]
+script = ExtResource( 12 )
+is_outline = true
 
 [node name="Popup_cont" type="MarginContainer" parent="."]
-visible = false
-margin_right = 624.0
-margin_bottom = 397.0
+margin_left = 77.0
+margin_top = 97.0
+margin_right = 749.0
+margin_bottom = 539.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="loadAudio" type="FileDialog" parent="Popup_cont"]
-margin_right = 624.0
-margin_bottom = 397.0
+margin_right = 672.0
+margin_bottom = 442.0
 window_title = "Open a File"
 mode = 0
 access = 2
@@ -133,43 +82,172 @@ current_dir = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot"
 current_path = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot/"
 
 [node name="notice" type="AcceptDialog" parent="Popup_cont"]
-margin_right = 624.0
-margin_bottom = 397.0
+margin_right = 672.0
+margin_bottom = 442.0
+
+[node name="MapInfo" parent="Popup_cont" instance=ExtResource( 10 )]
+margin_right = 672.0
+margin_bottom = 500.0
+
+[node name="SaveMap" type="FileDialog" parent="Popup_cont"]
+margin_right = 672.0
+margin_bottom = 442.0
+access = 2
+filters = PoolStringArray( "*.json" )
+current_dir = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot"
+current_path = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot/"
+
+[node name="ImportMap" type="FileDialog" parent="Popup_cont"]
+margin_right = 672.0
+margin_bottom = 442.0
+window_title = "Open a File"
+mode = 0
+access = 2
+filters = PoolStringArray( "*.json" )
+current_dir = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot"
+current_path = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot/"
+
+[node name="MarginCont_file" type="MarginContainer" parent="."]
+margin_left = 15.0
+margin_top = 17.0
+margin_right = 266.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="file_btn_cont" type="HBoxContainer" parent="MarginCont_file"]
+margin_right = 251.0
+margin_bottom = 36.0
+
+[node name="import_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
+margin_right = 76.0
+margin_bottom = 36.0
+text = "Import"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="save_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
+margin_left = 80.0
+margin_right = 135.0
+margin_bottom = 36.0
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="load_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
+margin_left = 139.0
+margin_right = 191.0
+margin_bottom = 36.0
+text = "load"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginCont_play" type="MarginContainer" parent="."]
+margin_left = 364.0
+margin_top = 17.0
+margin_right = 440.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="play_btn_cont" type="HBoxContainer" parent="MarginCont_play"]
+margin_right = 76.0
+margin_bottom = 36.0
+
+[node name="play_btn" type="Button" parent="MarginCont_play/play_btn_cont"]
+margin_right = 12.0
+margin_bottom = 36.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginCont_zoom" type="MarginContainer" parent="."]
+margin_left = 797.0
+margin_top = 18.0
+margin_right = 932.0
+margin_bottom = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZoomBtn" parent="MarginCont_zoom" instance=ExtResource( 9 )]
+margin_right = 135.0
+margin_bottom = 107.0
+
+[node name="MarginCont_timers" type="MarginContainer" parent="."]
+margin_left = 479.0
+margin_right = 711.0
+margin_bottom = 84.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start_pos_input" parent="MarginCont_timers" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 232.0
+margin_bottom = 84.0
+
+[node name="bpm_input" parent="MarginCont_timers" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 232.0
+margin_bottom = 84.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_left = 9.0
-margin_top = 168.0
-margin_right = 1268.0
-margin_bottom = 486.0
+margin_top = 152.0
+margin_right = 1276.0
+margin_bottom = 709.0
+rect_min_size = Vector2( 1102, 256 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 1276.0
+margin_bottom = 557.0
+rect_min_size = Vector2( 0, 256 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Waveform" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_right = 1276.0
 
 [node name="AudioWaveform" parent="ScrollContainer/VBoxContainer/Waveform" instance=ExtResource( 6 )]
-margin_right = 1255.0
-margin_bottom = 256.0
+margin_top = 4.0
+margin_right = 1276.0
+margin_bottom = 160.0
 mouse_filter = 1
-color = Color( 0.317647, 0.317647, 0.317647, 1 )
+color = Color( 1, 0.686275, 0, 0.196078 )
 
 [node name="CursorControl" type="Control" parent="ScrollContainer/VBoxContainer/Waveform"]
-margin_top = 4.0
-margin_bottom = 4.0
+margin_right = 1276.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/Waveform/CursorControl"]
-margin_left = 0.664
-margin_right = 1255.66
+margin_right = 1280.0
 margin_bottom = 256.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 1
 size_flags_vertical = 1
-custom_styles/slider = SubResource( 1 )
+custom_icons/tick = SubResource( 1 )
+custom_icons/grabber_disabled = SubResource( 2 )
+custom_icons/grabber_highlight = SubResource( 3 )
+custom_icons/grabber = SubResource( 4 )
+custom_styles/slider = SubResource( 5 )
+custom_styles/grabber_area = SubResource( 6 )
 value = 1.0
 scrollable = false
 __meta__ = {
@@ -179,16 +257,42 @@ __meta__ = {
 [node name="CursorPlayback" parent="ScrollContainer/VBoxContainer/Waveform/CursorControl" instance=ExtResource( 8 )]
 
 [node name="CursorStatic" parent="ScrollContainer/VBoxContainer/Waveform/CursorControl" instance=ExtResource( 8 )]
+is_static = true
+
+[node name="separator" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 1276.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 18 )
+
+[node name="TracksCont" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+show_behind_parent = true
+margin_top = 26.0
+margin_right = 1276.0
+margin_bottom = 126.0
+rect_min_size = Vector2( 0, 100 )
+mouse_filter = 0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 [connection signal="minimum_size_changed" from="." to="." method="_on_editor_minimum_size_changed"]
+[connection signal="file_selected" from="Popup_cont/loadAudio" to="." method="_on_loadAudio_file_selected"]
+[connection signal="map_info_saved" from="Popup_cont/MapInfo" to="." method="_on_MapInfo_map_info_saved"]
+[connection signal="file_selected" from="Popup_cont/SaveMap" to="." method="_on_SaveMapDialog_file_selected"]
+[connection signal="file_selected" from="Popup_cont/ImportMap" to="." method="_on_ImportMap_file_selected"]
 [connection signal="pressed" from="MarginCont_file/file_btn_cont/import_btn" to="." method="_on_import_btn_pressed"]
+[connection signal="pressed" from="MarginCont_file/file_btn_cont/save_btn" to="." method="_on_save_btn_pressed"]
+[connection signal="pressed" from="MarginCont_file/file_btn_cont/load_btn" to="." method="_on_load_btn_pressed"]
 [connection signal="pressed" from="MarginCont_play/play_btn_cont/play_btn" to="." method="_on_play_btn_pressed"]
 [connection signal="down" from="MarginCont_zoom/ZoomBtn" to="." method="_on_ZoomBtn_down"]
 [connection signal="up" from="MarginCont_zoom/ZoomBtn" to="." method="_on_ZoomBtn_up"]
+[connection signal="value_changed" from="MarginCont_timers/start_pos_input" to="." method="_on_start_pos_input_value_changed"]
 [connection signal="tempo_changed" from="MarginCont_timers/bpm_input" to="." method="_on_tempo_changed"]
-[connection signal="file_selected" from="Popup_cont/loadAudio" to="." method="_on_loadAudio_file_selected"]
 [connection signal="minimum_size_changed" from="ScrollContainer" to="." method="_on_ScrollContainer_minimum_size_changed"]
 [connection signal="resized" from="ScrollContainer" to="." method="_on_ScrollContainer_resized"]
 [connection signal="value_changed" from="ScrollContainer/VBoxContainer/Waveform/CursorControl/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

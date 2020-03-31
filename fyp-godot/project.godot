@@ -22,14 +22,17 @@ config/icon="res://icon.png"
 [autoload]
 
 EDITOR_C="*res://editor/editor_c.gd"
+Utils="*res://editor/utils.gd"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
 window/vsync/use_vsync=false
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "gdutils" )
 
 [input]
 
@@ -60,7 +63,7 @@ editor_play={
 }
 editor_follow_play={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
  ]
 }
 editor_scale_up={
@@ -71,5 +74,10 @@ editor_scale_up={
 editor_scale_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+ ]
+}
+editor_cursor_focus={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
  ]
 }

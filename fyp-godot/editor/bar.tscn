@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://editor/bar.gd" type="Script" id=1]
+[ext_resource path="res://editor/bar_grid.gd" type="Script" id=2]
+
+[node name="Bar" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="IndexLabel" type="Label" parent="."]
+margin_left = -0.0512924
+margin_top = -34.1609
+margin_right = 44.9487
+margin_bottom = -20.1609
+text = "index"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grid" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 264.0
+margin_bottom = 124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]

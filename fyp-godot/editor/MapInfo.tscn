@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://editor/MapInfo.gd" type="Script" id=1]
+
+[node name="MapInfo" type="ConfirmationDialog"]
+margin_right = 385.0
+margin_bottom = 310.0
+window_title = "Save Map"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 377.0
+margin_bottom = 274.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="message" type="Label" parent="VBoxContainer"]
+margin_right = 369.0
+margin_bottom = 14.0
+text = "Please enter map details"
+align = 1
+
+[node name="Creator" type="Label" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 369.0
+margin_bottom = 66.0
+text = "
+
+Map Creator"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Creator_input" type="LineEdit" parent="VBoxContainer"]
+margin_top = 70.0
+margin_right = 369.0
+margin_bottom = 94.0
+
+[node name="Artist" type="Label" parent="VBoxContainer"]
+margin_top = 98.0
+margin_right = 369.0
+margin_bottom = 129.0
+text = "
+Artist"
+
+[node name="RequiredNotice" type="Label" parent="VBoxContainer"]
+margin_top = 133.0
+margin_right = 369.0
+margin_bottom = 147.0
+custom_colors/font_color = Color( 0.141176, 0.964706, 0.113725, 1 )
+text = "required"
+
+[node name="Artist_input" type="LineEdit" parent="VBoxContainer"]
+margin_top = 151.0
+margin_right = 369.0
+margin_bottom = 175.0
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_top = 179.0
+margin_right = 369.0
+margin_bottom = 210.0
+text = "
+Title"
+
+[node name="Title_input" type="LineEdit" parent="VBoxContainer"]
+margin_top = 214.0
+margin_right = 369.0
+margin_bottom = 238.0
+[connection signal="confirmed" from="." to="." method="_on_MapInfo_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_MapInfo_popup_hide"]

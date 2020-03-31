@@ -33,5 +33,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011, 0 )
 transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.025, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, -0.0325817, -7.15256e-007, 0.0531986 )
+transform = Transform( 0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, -0.0325817, -7.15256e-07, 0.0531986 )
 shape = SubResource( 3 )

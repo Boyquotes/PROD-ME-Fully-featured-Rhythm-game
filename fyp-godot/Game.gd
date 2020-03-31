@@ -5,8 +5,8 @@ onready var highway_node = $highway
 
 var audio
 var map
-var audio_file = "res://audio.ogg"
-var map_file = "res://map.json"
+var audio_file = "res://audio3.ogg"
+var map_file = "res://map3.json"
 
 var tempo
 var bar_length
