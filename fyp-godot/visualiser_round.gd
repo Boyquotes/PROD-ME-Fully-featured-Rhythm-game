@@ -72,8 +72,6 @@ func _draw():
 	if is_circle == true:
 		var angle = PI
 		var angle_interval = 2 * PI / definition
-		var radius = 50
-		var length = 50
 	
 		for i in range(definition):
 			var normal = Vector2(0, -1).rotated(angle)

@@ -2,11 +2,13 @@ extends Spatial
 
 export(int, 1,4) var line
 
+onready var mesh = get_node("MeshInstance")
 var is_pressed = false
 var is_hitting = false
 
 func _ready():
 	set_process_input(true)
+	mesh.hide()
 	
 func _input(event):
 	match line:
@@ -39,9 +41,8 @@ func _input(event):
 				is_pressed = false
 				is_hitting = false
 				
-func _process(delta):
+func _process(_delta):
 	if is_pressed:
-		self.scale = Vector3(0.95, 0.95, 0.95)
+		mesh.show()
 	else:
-		self.scale = Vector3(1,1,1)
-		
+		mesh.hide()

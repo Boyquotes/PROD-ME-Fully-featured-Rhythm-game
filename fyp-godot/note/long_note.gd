@@ -17,16 +17,15 @@ func _on_process(delta):
 		if is_colliding and gate and not hold_end:
 			if gate.is_hitting:
 				hold_started = true
-				$MeshInstance.hide()
 			elif hold_started:
 				hold_end = true
 
 		if hold_started and not hold_end:
 			note_len -= speed.z * delta
+			hit()
 			if note_len <= 0:
 				hit()
 			else:
 				$note_beam.scale = Vector3(1,1,note_len)
 				translate(-speed*delta)
-				multiplier = 1
 					

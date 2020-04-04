@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://theme/fonts/OpenSans-Regular - Copy.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui.gd" type="Script" id=2]
+[ext_resource path="res://accuracy_cont.gd" type="Script" id=3]
+
+[node name="ui_node" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 640.148 ]
+}
+
+[node name="Max combo label" type="Label" parent="."]
+margin_left = 421.899
+margin_top = 11.3818
+margin_right = 496.899
+margin_bottom = 25.3818
+text = "Max Combo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="max_combo" type="Label" parent="."]
+margin_left = 423.614
+margin_top = 24.2425
+margin_right = 498.614
+margin_bottom = 38.2425
+text = "000000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score label" type="Label" parent="."]
+margin_left = 11.2165
+margin_top = 1.9507
+margin_right = 83.2165
+margin_bottom = 15.9507
+custom_fonts/font = ExtResource( 1 )
+text = "Score"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+margin_left = 9.41151
+margin_top = 34.2161
+margin_right = 108.412
+margin_bottom = 62.2161
+custom_fonts/font = ExtResource( 1 )
+text = "000000000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="combo" type="Label" parent="."]
+margin_left = 511.384
+margin_top = 403.0
+margin_right = 770.384
+margin_bottom = 720.0
+custom_fonts/font = ExtResource( 1 )
+text = "0000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="accuracy_cont" type="Control" parent="."]
+anchor_top = 0.007
+anchor_bottom = 0.007
+margin_top = -0.04
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,31 +1,33 @@
 extends Spatial
 
+
 export(int, 1, 4) var line
 var position = 0
 var length
 var length_scale
 var speed
 var score = 0
+var accuracy
 var multiplier = 1
 
 var is_colliding = false
 var is_hit = false
 var gate
-
+onready var ui = get_tree().get_root().get_node("Game").get_node("ui_node")
 func _process(delta):
 	_on_process(delta)
-
+		
 func _on_process(delta):
 	pass
 	
 func hit():
 	is_hit = true
 	gate.is_hitting = false
-	score += 100 * multiplier
-	multiplier += 1
-	hide()
-	print("score:" + str(score))
-	print("combo:" + str(multiplier))
+	#var n = get_node("highway")
+	#print(get_parent().get_name())
+	if ui != null:
+		ui.hit_feedback(accuracy)
+		ui.add_score()
 	
 func _ready():
 	_on_ready()
@@ -53,11 +55,28 @@ func add_listeners():
 	$Area.connect("area_exited", self,"_on_area_exited")
 
 func _on_area_entered(area):
-	if area.is_in_group("gate"):
+	if area.is_in_group("gate_perfect"):
+		accuracy = 1
 		is_colliding = true
 		gate = area.get_parent()
-		
+	elif area.is_in_group("gate_great"):
+		accuracy = 2
+		is_colliding = true
+		gate = area.get_parent()
+	elif area.is_in_group("gate_ok"):
+		accuracy = 3
+		is_colliding = true
+		gate = area.get_parent()
+	if area.is_in_group("gate_miss"):
+		accuracy = 4
+		is_colliding = true
+		gate = area.get_parent()
 
 func _on_area_exited(area):
-	if area.is_in_group("gate"):
-		is_colliding = false
+	pass
+	#if area.is_in_group("gate_perfect"):
+		#is_colliding = false
+	#elif area.is_in_group("gate_great"):
+		#is_colliding = false
+	#elif area.is_in_group("gate_ok"):
+	#	is_colliding = false

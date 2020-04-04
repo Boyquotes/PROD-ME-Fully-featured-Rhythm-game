@@ -22,7 +22,6 @@ func setup(game):
 
 func _process(delta):
 	bars_node.translate(speed*delta)
-	
 	for bar in bars:
 		if bar.translation.z + bars_node.translation.z >= bar_length:
 			remove_bar(bar)
@@ -56,5 +55,5 @@ func remove_bar(bar):
 	bars.erase(bar)
 	
 func add_bars():
-	for i in range(4):
+	for i in range(6):
 		add_bar()

@@ -7,5 +7,3 @@ func _on_process(delta):
 		if is_colliding and gate:
 			if gate.is_hitting:
 				hit()
-			else:
-				multiplier = 1

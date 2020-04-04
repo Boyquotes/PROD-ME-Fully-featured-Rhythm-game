@@ -1,15 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://bar.gd" type="Script" id=1]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
+vertex_color_use_as_albedo = true
 albedo_color = Color( 1, 1, 1, 0.235294 )
 
 [sub_resource type="PlaneMesh" id=2]
 material = SubResource( 1 )
-
-[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 2, 1 )
 
 [node name="bar" type="Spatial"]
 transform = Transform( 1.1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -19,28 +19,3 @@ script = ExtResource( 1 )
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 0.075, 0, 0.02, 0.1 )
 mesh = SubResource( 2 )
 material/0 = null
-
-[node name="MeshInstance5" type="MeshInstance" parent="."]
-transform = Transform( 0.433013, -0.5, 0, 0.25, 0.866025, 0, 0, 0, 0.075, 2.4, 0.26, 0.1 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="MeshInstance6" type="MeshInstance" parent="."]
-transform = Transform( 0.433013, 0.5, 0, -0.25, 0.866025, 0, 0, 0, 0.075, -2.4, 0.26, 0.1 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( -1.74846e-07, 0, -0.05, 0, 1, 0, 4, 0, -2.18557e-09, 0, 0.02, -4 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 1 )
-
-[node name="MeshInstance4" type="MeshInstance" parent="."]
-transform = Transform( -1.74846e-07, 0, -0.05, 0, 1, 0, 4, 0, -2.18557e-09, -1, 0.02, -4 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 1 )
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( -1.74846e-07, 0, -0.05, 0, 1, 0, 4, 0, -2.18557e-09, 1, 0.02, -4 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 1 )
