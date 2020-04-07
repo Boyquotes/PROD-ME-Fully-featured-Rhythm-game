@@ -16,11 +16,9 @@ var session_data = {}
 onready  var creator_input = get_node("VBoxContainer/Creator_input")
 onready  var artist_input = get_node("VBoxContainer/Artist_input")
 onready  var title_input = get_node("VBoxContainer/Title_input")
-onready  var required_label = get_node("VBoxContainer/RequiredNotice")
 
 func setup(audio_file_name, audio_comments):
 	self.audio_file_name = audio_file_name
-	hide_required_notice()
 	init_audio_inputs(audio_comments)
 	init_map_inputs()
 
@@ -71,23 +69,12 @@ func set_data(creator_data, audio_data):
 	apply_map_inputs()
 	apply_audio_inputs()
 
-
-func hide_required_notice():
-	required_label.text = ""
-	
-func show_required_notice():
-	required_label.text = tr("*required field")
-
-func _on_MapInfo_popup_hide():
-	hide_required_notice()
-
 func _on_MapInfo_confirmed():
 	if creator_input.get_text() == "" or title_input.get_text() == "":
 		var pos = get_position()
 		popup()
 		set_position(pos)
-		show_required_notice()
-		return 
+		return
 		
 	apply_map_inputs()
 	apply_audio_inputs()

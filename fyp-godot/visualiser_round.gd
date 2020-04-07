@@ -10,6 +10,8 @@ export var total_h = 200
 export var rotate = true
 export var cycle_colors = false
 export var color = Color("#dde5e9")
+export var line_thickness = 1
+export var is_inverted = false
 
 var min_freq = 20
 var max_freq = 15000
@@ -17,8 +19,8 @@ var max_freq = 15000
 var max_db = 0
 var min_db = -50
 
-var accel = 20
-var rotate_accel = 10
+export var accel = 20
+export var rotate_accel = 10
 var histogram = []
 
 var hue_timer = 0
@@ -56,7 +58,7 @@ func _process(delta):
 	
 	if rotate == true:
 		rotate(delta / rotate_accel)
-	
+		
 	if cycle_colors == true:
 		hue_timer = fmod(hue_timer + delta * deg_speed, 360)
 		var h = hue_timer / 360 
@@ -76,14 +78,21 @@ func _draw():
 		for i in range(definition):
 			var normal = Vector2(0, -1).rotated(angle)
 			var start_pos = normal * radius
-			var end_pos = normal * (radius + histogram[i] * length)
-			draw_line(start_pos, end_pos, color, 1, true)
+			var end_pos
+			if is_inverted:
+				end_pos = normal * (radius + -histogram[i] * length)
+			else:
+				end_pos = normal * (radius + histogram[i] * length)
+			draw_line(start_pos, end_pos, color, line_thickness, true)
 			angle += angle_interval
 	else:
 		var draw_pos = Vector2(0, 0)
 		var w_interval = total_w / definition
 		
 		for i in range(definition):
-			draw_line(draw_pos, draw_pos + Vector2(0, -histogram[i] * total_h), color, 1, true)
+			if is_inverted:
+				draw_line(draw_pos, draw_pos + Vector2(0, -histogram[i] * total_h), color, line_thickness, true)
+			else:
+				draw_line(-draw_pos, -draw_pos + Vector2(0, histogram[i] * total_h), color, line_thickness, true)
 			draw_pos.x += w_interval
 		

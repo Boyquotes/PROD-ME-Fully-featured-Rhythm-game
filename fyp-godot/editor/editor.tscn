@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://theme/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://editor/MapInfo.tscn" type="PackedScene" id=10]
 [ext_resource path="res://visualiser_round.gd" type="Script" id=11]
 [ext_resource path="res://editor/Box.gd" type="Script" id=12]
+[ext_resource path="res://menu/LoadingScreen.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -28,8 +29,6 @@
 [node name="editor" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.857361
-margin_right = 0.857422
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -37,12 +36,12 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.886
-margin_left = 946.0
-margin_top = 74.0
-margin_right = -314.0
-margin_bottom = -537.92
+margin_left = -274.207
+margin_top = 80.0
+margin_right = -18.207
+margin_bottom = 80.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -57,16 +56,21 @@ definition = 256
 total_w = 256
 total_h = 60
 rotate = false
+is_inverted = true
 
 [node name="Outline" type="Node2D" parent="CenterContainer"]
 script = ExtResource( 12 )
 is_outline = true
 
 [node name="Popup_cont" type="MarginContainer" parent="."]
-margin_left = 77.0
-margin_top = 97.0
-margin_right = 749.0
-margin_bottom = 539.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -336.0
+margin_top = -221.0
+margin_right = 336.0
+margin_bottom = 221.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,6 +78,7 @@ __meta__ = {
 [node name="loadAudio" type="FileDialog" parent="Popup_cont"]
 margin_right = 672.0
 margin_bottom = 442.0
+popup_exclusive = true
 window_title = "Open a File"
 mode = 0
 access = 2
@@ -84,23 +89,19 @@ current_path = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot/"
 [node name="notice" type="AcceptDialog" parent="Popup_cont"]
 margin_right = 672.0
 margin_bottom = 442.0
+popup_exclusive = true
+window_title = "Notice"
 
 [node name="MapInfo" parent="Popup_cont" instance=ExtResource( 10 )]
 margin_right = 672.0
 margin_bottom = 500.0
-
-[node name="SaveMap" type="FileDialog" parent="Popup_cont"]
-margin_right = 672.0
-margin_bottom = 442.0
-access = 2
-filters = PoolStringArray( "*.json" )
-current_dir = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot"
-current_path = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot/"
+popup_exclusive = true
 
 [node name="ImportMap" type="FileDialog" parent="Popup_cont"]
 margin_right = 672.0
 margin_bottom = 442.0
 window_title = "Open a File"
+resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.json" )
@@ -279,10 +280,16 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+
+[node name="LoadingScreen" parent="OverlayLayer" instance=ExtResource( 13 )]
+visible = false
 [connection signal="minimum_size_changed" from="." to="." method="_on_editor_minimum_size_changed"]
 [connection signal="file_selected" from="Popup_cont/loadAudio" to="." method="_on_loadAudio_file_selected"]
+[connection signal="about_to_show" from="Popup_cont/MapInfo" to="." method="_on_MapInfo_about_to_show"]
 [connection signal="map_info_saved" from="Popup_cont/MapInfo" to="." method="_on_MapInfo_map_info_saved"]
-[connection signal="file_selected" from="Popup_cont/SaveMap" to="." method="_on_SaveMapDialog_file_selected"]
+[connection signal="popup_hide" from="Popup_cont/MapInfo" to="." method="_on_MapInfo_popup_hide"]
 [connection signal="file_selected" from="Popup_cont/ImportMap" to="." method="_on_ImportMap_file_selected"]
 [connection signal="pressed" from="MarginCont_file/file_btn_cont/import_btn" to="." method="_on_import_btn_pressed"]
 [connection signal="pressed" from="MarginCont_file/file_btn_cont/save_btn" to="." method="_on_save_btn_pressed"]

@@ -3,12 +3,15 @@ extends Control
 var ogg_file_path
 var is_playing = false
 var is_follow_playing = false
-var window_size = 950
+var window_size = 720
 var stream = AudioStreamOGGVorbis.new()
+var popup_active = false
 
 var editor_dir
 var audio_file_name = ""
 var audio_load_thread = Thread.new()
+var editor_thread = Thread.new()
+var load_percent = 0
 var audio_loaded = false
 
 var map_start_pos = 0
@@ -46,7 +49,6 @@ var active_track
 onready  var map_info_dialog = get_node("Popup_cont/MapInfo")
 onready  var load_audio_dialog = get_node("Popup_cont/loadAudio")
 onready  var err_notice_dialog = get_node("Popup_cont/notice")
-onready  var save_map_dialog = get_node("Popup_cont/SaveMap")
 onready  var import_map_dialog = get_node("Popup_cont/ImportMap")
 
 onready  var stream_player = get_node("AudioStreamPlayer")
@@ -71,6 +73,8 @@ onready  var cursor_static = cursor_c.get_node("CursorStatic")
 onready  var cursor_playback = cursor_c.get_node("CursorPlayback")
 onready  var cursor_slider = cursor_c.get_node("HSlider")
 
+onready var loading_screen = get_node("OverlayLayer/LoadingScreen")
+
 var track_scn = preload("res://editor/track.tscn")
 onready  var tracks_c = get_node("ScrollContainer/VBoxContainer/TracksCont")
 
@@ -78,8 +82,16 @@ var editor_scn_path = "res://editor/editor.tscn"
 
 #Setting up ready initialization on startup
 func _ready():
+	load_editor()
+	
+func load_editor():
+	editor_thread.start(self, "build_editor", null, 1)
+
+func build_editor(empty):
+	load_percent += 100
+	loading_screen.update_percent(load_percent)
+	
 	VisualServer.set_default_clear_color(EDITOR_C.BG_COLOR)
-	get_tree().set_auto_accept_quit(false)
 	
 	set_process(true)
 	set_process_input(true)
@@ -89,7 +101,7 @@ func _ready():
 	setup_editor_dir()
 	
 	update_last_file_path(EDITOR_C.last_file_path)
-
+	
 func _process(delta):
 	if pending_wscroll_update:
 		window_scroll.set_h_scroll(window_scroll_size)
@@ -132,8 +144,6 @@ func _process(delta):
 		if cursor_playback.get_position().x >= window_scroll.get_size().x * 0.5:
 			window_scroll.set_h_scroll((int(cursor_playback.get_position().x) - int(window_scroll.get_size().x * 0.5)))
 	
-	
-#Update last known file path
 func update_last_file_path(file_path):
 	EDITOR_C.last_file_path = file_path
 	
@@ -292,10 +302,12 @@ func _on_ZoomBtn_up():
 	scale_to(1)
 
 func _input(e):
-	if not audio_loaded:return 
-	if e.is_action_pressed("editor_play"):
+	if not audio_loaded:
+		return 
+	if e.is_action_pressed("editor_play") and popup_active == false:
 		is_follow_playing = false
 		play_btn.grab_focus()
+		
 		if e.is_action_pressed("editor_follow_play"):
 			if not is_playing:
 				is_follow_playing = true
@@ -318,37 +330,18 @@ func _on_ScrollContainer_minimum_size_changed():
 func _on_ScrollContainer_resized():
 	waveform_n.set_viewport_rect(Rect2(Vector2(window_scroll_last_val, 0), Vector2(window_scroll.get_size().x, EDITOR_C.WAVEFORM_H)))
 	
-#Show any ok notices
-func show_notice(_text):
-	err_notice_dialog.set_text("error")
-	err_notice_dialog.popup()
+func show_notice(text):
+	err_notice_dialog.set_text(text)
+	err_notice_dialog.set_as_minsize()
+	err_notice_dialog.popup_centered()
 
-#New button listener
 func _on_import_btn_pressed():
 	load_audio_dialog.set_current_path(EDITOR_C.last_file_path)
 	load_audio_dialog.set_current_file("")
-	load_audio_dialog.popup()
+	load_audio_dialog.popup_centered()
 
-#Listener for selecting the audio file
 func _on_loadAudio_file_selected(path):
 	audio_load_thread.start(self, "load_audio", path)
-
-#Copying out audio file into a folder for backup purposes
-func copy_audio(input_file_path):
-	print("copy started")
-	var file_name = input_file_path.get_file()
-	var file_format = str(file_name.get_extension()).to_lower()
-	var dir = Directory.new()
-	audio_file_name = file_name.substr(0, file_name.find_last("."))
-	ogg_file_path = editor_dir + "/" + "audio" + ".ogg"
-	
-	if file_format == "ogg":
-		dir.copy(input_file_path, ogg_file_path)
-	else :
-		show_notice(str(file_format) + ("File not supported"))
-		return false
-	print("copy finished")
-	return true
 
 #Checking if the file exists
 func check_audio():
@@ -381,21 +374,28 @@ func load_ogg(path):
 #loading the selected file
 func load_audio(input_file_path):
 	print("loading started ", input_file_path)
+	enable_load_audio(false)
+	
+	update_load_audio(tr("Loading."))
 
 	var is_copied = copy_audio(input_file_path)
 	if not is_copied:
 		audio_load_thread.wait_to_finish()
+		enable_load_audio(true)
 		return 
 
 	if not check_audio():
 		audio_load_thread.wait_to_finish()
+		enable_load_audio(true)
 		return 
-
+	
+	update_load_audio(tr("Loading.."))
 	stream = load_ogg(ogg_file_path)
 	print("FILE:", ogg_file_path, stream)
 	if not is_audio_loaded(stream):
 		return 
 	stream_player.set_stream(stream)
+	update_load_audio(tr("Loading..."))
 
 	load_waveform()
 	set_params()
@@ -403,27 +403,33 @@ func load_audio(input_file_path):
 	audio_loaded = true
 	update_controls()
 	
-	audio_load_thread.wait_to_finish()
 	update_last_file_path(input_file_path)
-	
+	update_load_audio(tr("Audio Loaded"))
+	audio_load_thread.wait_to_finish()
 	print("audio loaded")
 	
 func update_controls():
 	if audio_loaded:
 		load_audio_btn.set_disabled(true)
+		
 		play_btn.set_disabled(false)
+		import_map_btn.set_disabled(false)
+		save_map_btn.set_disabled(false)
 		scale_up_btn.set_disabled(false)
 		scale_down_btn.set_disabled(false)
 		tempo_btn.set_disabled(false)
-		window_scroll.show()
 		add_track()
+		
+		window_scroll.show()
 	elif not audio_loaded:
-		load_audio_btn.set_disabled(false)
 		play_btn.set_disabled(true)
+		import_map_btn.set_disabled(true)
+		save_map_btn.set_disabled(true)
 		scale_up_btn.set_disabled(true)
 		scale_down_btn.set_disabled(true)
 		tempo_btn.set_disabled(true)
 		
+		visualizer_cont.hide()
 		window_scroll.hide()
 		
 func _on_play_btn_pressed():
@@ -470,17 +476,6 @@ func unset_active_track():
 func grab_cursor_slider_focus(e):
 	return 
 # warning-ignore:unreachable_code
-	if e.global_pos.y <= cursor_c.get_global_position().y + cursor_c.get_size().y + 10.0:
-		if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT):
-			cursor_slider_pressed = e.pressed
-			if cursor_slider_pressed:
-				cursor_slider.set_value(e.global_pos.x - cursor_slider.get_global_position().x)
-				
-		if e is InputEventMouseMotion:
-			if cursor_slider_pressed:
-					cursor_slider.set_value(e.global_pos.x - cursor_slider.get_global_position().x)
-		return true
-	return false
 
 func set_active_note(note):
 	if active_note != null:active_note.set_active(false)
@@ -499,31 +494,53 @@ func redraw_map():
 	for t in tracks:
 		t.setup(bars_count, true)
 
-
-func _on_SaveMapDialog_file_selected(path):
-	export_data(path)
-
-
 func _on_MapInfo_map_info_saved():
 	map_info_was_saved = true
-	if pending_export:
-		save_map_dialog.set_current_path(EDITOR_C.last_file_path)
-		save_map_dialog.set_current_file("")
-		save_map_dialog.popup()
-		
+	export_data()
 
 
 func _on_save_btn_pressed():
 	if not map_info_was_saved:
-		map_info_dialog.popup()
-		
+		map_info_dialog.popup_centered()
 		pending_export = true
-	else :
-		save_map_dialog.set_current_path(EDITOR_C.last_file_path)
-		save_map_dialog.set_current_file("")
-		save_map_dialog.popup()
 
-func export_data(file_path):
+#Copying out audio file into a folder for backup purposes
+func copy_audio(input_file_path):
+	print("copy started")
+	var file_name = input_file_path.get_file()
+	var file_format = str(file_name.get_extension()).to_lower()
+	var dir = Directory.new()
+	audio_file_name = file_name.substr(0, file_name.find_last("."))
+	ogg_file_path = editor_dir + "/" + "audio" + ".ogg"
+	
+	if file_format == "ogg":
+		dir.copy(input_file_path, ogg_file_path)
+	else :
+		show_notice(str(file_format) + ("File not supported"))
+		return false
+	print("copy finished")
+	return true
+
+func export_data():
+	var songs_dir = "songs"
+	var song_file
+	var song_folder
+	var new_dir
+	
+	var dir = Directory.new()
+	print("current dir: ", dir.get_current_dir())
+	var code = dir.open(songs_dir)
+	
+	print("OPEN RETURN CODE: " + str(code))
+	var rand_int
+	randomize()
+	rand_int = randi()
+	song_folder = str(rand_int) + " " + map_info_dialog.audio_info.artist + "-" + map_info_dialog.audio_info.title 
+	print(song_folder)
+	dir.make_dir(song_folder)
+	new_dir = songs_dir + "/" + song_folder
+	dir.open(new_dir)
+	
 	var tracks_data = []
 	for t in tracks:
 		tracks_data.append(t.get_data())
@@ -531,15 +548,32 @@ func export_data(file_path):
 	var data = {
 		audio = map_info_dialog.audio_info, 
 		creator = map_info_dialog.creator, 
+		audio_file = map_info_dialog.audio_info.artist + "-" + map_info_dialog.audio_info.title + ".ogg",
 		date = get_curr_date(), 
 		tempo = track_tempo, 
 		start_pos = map_start_pos * EDITOR_C.CELL_EXPORT_SCALE, 
 		tracks = tracks_data, 
 	}
-
-	Utils.write_json_file(file_path, data)
-	update_last_file_path(file_path)
+	new_dir += "/" + "map-" + map_info_dialog.audio_info.artist + "-" + map_info_dialog.audio_info.title + ".json"
+	Utils.write_json_file(new_dir, data)
+	update_last_file_path(new_dir)
+	new_dir = songs_dir + "/" + song_folder
+	new_dir += "/" +map_info_dialog.audio_info.artist + "-" + map_info_dialog.audio_info.title + ".ogg"
+	
+	var file_name = "editor_dir/audio.ogg"
+	var file_format = str(file_name.get_extension()).to_lower()
+	ogg_file_path = editor_dir + "/" + "audio" + ".ogg"
+	
+	if file_format == "ogg":
+		dir.copy(ogg_file_path, new_dir)
+	else :
+		show_notice(str(file_format) + ("File not found"))
+		return false
+		
+	show_notice("Map Saved Successfully")
+	print("copy finished")
 	print("data exported")
+	
 
 func get_curr_date():
 	var today = OS.get_date()
@@ -549,11 +583,20 @@ func get_curr_date():
 func _on_load_btn_pressed():
 	import_map_dialog.set_current_path(EDITOR_C.last_file_path)
 	import_map_dialog.set_current_file("")
-	import_map_dialog.popup()
+	import_map_dialog.popup_centered()
 	
+func enable_load_audio(enabled):
+	if enabled:
+		load_audio_btn.set_text("Load Audio")
+		load_audio_btn.set_disabled(false)
+	else :
+		load_audio_btn.set_text("Loading")
+		load_audio_btn.set_disabled(true)
 	
-
-
+func update_load_audio(text):
+	if load_audio_btn.is_disabled():
+		load_audio_btn.set_text(text)
+		
 func _on_ImportMap_file_selected(path):
 	import_data(path)
 
@@ -565,7 +608,6 @@ func import_data(path):
 	track_tempo = int(data.tempo)
 	tempo_btn.set_tempo(track_tempo)
 
-# warning-ignore:integer_division
 	map_start_pos = int(int(data.start_pos) / EDITOR_C.CELL_EXPORT_SCALE)
 	set_start_input.input.set_value(map_start_pos)
 
@@ -605,3 +647,11 @@ func clear_tracks():
 		print("track ", t ," removed")
 		print("track ", tracks[0] ," removed")
 		destroy_track(tracks[0])
+
+
+func _on_MapInfo_about_to_show():
+	popup_active = true
+
+
+func _on_MapInfo_popup_hide():
+	popup_active = false

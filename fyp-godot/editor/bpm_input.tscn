@@ -30,6 +30,8 @@ __meta__ = {
 margin_right = 74.0
 margin_bottom = 24.0
 max_value = 999.0
+value = 130.0
+align = 1
 
 [node name="btn_tap" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 78.0

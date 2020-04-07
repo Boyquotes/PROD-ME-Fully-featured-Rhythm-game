@@ -27,7 +27,7 @@ func _on_meter_btn_pressed():
 	else :
 		var value = round(60.0 / tempo_meter_time)
 		tempo_meter_values.append(value)
-		if tempo_meter_values.size() > 4:tempo_meter_values.pop_front()
+		if tempo_meter_values.size() > 10:tempo_meter_values.pop_front()
 		print(tempo_meter_values)
 
 		var sum = 0.0

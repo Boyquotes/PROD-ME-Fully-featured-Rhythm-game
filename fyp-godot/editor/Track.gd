@@ -94,7 +94,7 @@ func add_bar(x, index, quarters_count):
 	bar.quarters_count = quarters_count
 	bar.set_x_position(x)
 	bars.append(bar)
-	bars_c.add_child(bar)
+	bars_c.call_deferred("add_child", bar)
 	return bar
 
 

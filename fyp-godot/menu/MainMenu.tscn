@@ -1,0 +1,191 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://visualiser_round.gd" type="Script" id=1]
+[ext_resource path="res://menu/stuck in the sound - lets go.wav" type="AudioStream" id=2]
+[ext_resource path="res://menu/bg.webm" type="VideoStream" id=3]
+[ext_resource path="res://menu/bg_loop.gd" type="Script" id=4]
+[ext_resource path="res://menu/MainMenu.shader" type="Shader" id=5]
+[ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://menu/MainMenu.gd" type="Script" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/blurSize = 12
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.443137, 0.443137, 0.443137, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.305882, 0.305882, 0.305882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.45098, 0.45098, 0.45098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = 1
+font_data = ExtResource( 6 )
+
+[sub_resource type="Environment" id=10]
+background_mode = 4
+tonemap_mode = 2
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+adjustment_enabled = true
+adjustment_brightness = 0.79
+adjustment_contrast = 1.27
+adjustment_saturation = 1.53
+
+[node name="MainMenu" type="Control"]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoCont" type="Control" parent="."]
+light_mask = 0
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoPlayer" type="VideoPlayer" parent="VideoCont"]
+light_mask = 0
+margin_right = 1281.0
+margin_bottom = 721.0
+stream = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlurFX" type="ColorRect" parent="VideoCont"]
+light_mask = 0
+material = SubResource( 1 )
+margin_right = 1299.0
+margin_bottom = 778.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Visualizers" type="Control" parent="."]
+material = SubResource( 2 )
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Visualizers"]
+stream = ExtResource( 2 )
+autoplay = true
+
+[node name="Top" type="Node2D" parent="Visualizers"]
+material = SubResource( 3 )
+position = Vector2( 1279.72, -0.383121 )
+script = ExtResource( 1 )
+definition = 128
+total_w = 1300
+rotate = false
+cycle_colors = true
+line_thickness = 5
+accel = 10
+
+[node name="Bottom" type="Node2D" parent="Visualizers"]
+material = SubResource( 4 )
+position = Vector2( 1.22586, 719.162 )
+script = ExtResource( 1 )
+definition = 128
+total_w = 1300
+rotate = false
+cycle_colors = true
+line_thickness = 5
+is_inverted = true
+accel = 10
+
+[node name="Menu_btns" type="Control" parent="."]
+margin_left = -124.0
+margin_top = -79.0
+margin_right = 323.0
+margin_bottom = 202.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play_btn" type="Button" parent="Menu_btns"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 454.927
+margin_top = 185.308
+margin_right = 627.927
+margin_bottom = 253.308
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Editor_btn" type="Button" parent="Menu_btns"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 454.927
+margin_top = 264.308
+margin_right = 627.927
+margin_bottom = 332.308
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+text = "Editor"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit_btn" type="Button" parent="Menu_btns"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 454.927
+margin_top = 345.308
+margin_right = 627.927
+margin_bottom = 413.308
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 10 )
+[connection signal="pressed" from="Menu_btns/Play_btn" to="." method="_on_Play_btn_pressed"]
+[connection signal="pressed" from="Menu_btns/Editor_btn" to="." method="_on_Editor_btn_pressed"]

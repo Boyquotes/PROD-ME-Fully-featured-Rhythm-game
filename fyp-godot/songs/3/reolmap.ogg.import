@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/reolmap.ogg-278f21dcfb1e0d7931b92f7357279da0.oggstr"
+
+[deps]
+
+source_file="res://songs/3/reolmap.ogg"
+dest_files=[ "res://.import/reolmap.ogg-278f21dcfb1e0d7931b92f7357279da0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

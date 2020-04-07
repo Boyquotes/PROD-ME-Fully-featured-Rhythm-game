@@ -12,7 +12,7 @@ func _ready():
 	
 func setup(game):
 	player.stream = game.audio
-	
+	player.stream.set_loop(false)
 	speed = game.speed
 	started = false
 	pre_start_duration = game.bar_length

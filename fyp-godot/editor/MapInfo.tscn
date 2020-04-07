@@ -16,6 +16,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 377.0
 margin_bottom = 274.0
+mouse_filter = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,6 +42,7 @@ __meta__ = {
 margin_top = 70.0
 margin_right = 369.0
 margin_bottom = 94.0
+caret_blink = true
 
 [node name="Artist" type="Label" parent="VBoxContainer"]
 margin_top = 98.0
@@ -60,6 +62,7 @@ text = "required"
 margin_top = 151.0
 margin_right = 369.0
 margin_bottom = 175.0
+caret_blink = true
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 margin_top = 179.0
@@ -72,5 +75,5 @@ Title"
 margin_top = 214.0
 margin_right = 369.0
 margin_bottom = 238.0
+caret_blink = true
 [connection signal="confirmed" from="." to="." method="_on_MapInfo_confirmed"]
-[connection signal="popup_hide" from="." to="." method="_on_MapInfo_popup_hide"]

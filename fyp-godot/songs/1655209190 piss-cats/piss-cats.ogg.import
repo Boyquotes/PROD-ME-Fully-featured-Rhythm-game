@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/piss-cats.ogg-e0ca21ac25651f5ae67e6f2ad4f46821.oggstr"
+
+[deps]
+
+source_file="res://songs/1655209190 piss-cats/piss-cats.ogg"
+dest_files=[ "res://.import/piss-cats.ogg-e0ca21ac25651f5ae67e6f2ad4f46821.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

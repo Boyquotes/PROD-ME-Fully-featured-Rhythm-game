@@ -10,15 +10,24 @@ var note_scale
 
 var curr_bar_ind
 var track_data
+var scaled_bar_amnt
+var max_indx
+var game
 
 func setup(game):
+	self.game = game
 	speed = Vector3(0,0,game.speed)
 	bar_length = game.bar_length
 	curr_location = Vector3(0,0,-bar_length)
 	note_scale = game.note_scale
 	curr_bar_ind = 0
 	track_data = game.map.tracks
-	add_bars()
+	scaled_bar_amnt = max(ceil(32 / bar_length), 1)
+	max_indx = 0
+	for t in track_data:
+		max_indx = max(max_indx, len(t.bars))
+		
+	add_bars(scaled_bar_amnt)
 
 func _process(delta):
 	bars_node.translate(speed*delta)
@@ -28,6 +37,8 @@ func _process(delta):
 			add_bar()
 
 func add_bar():
+	if (curr_bar_ind >= max_indx): 
+		return
 	var bar = bar_scene.instance()
 	bar.translation = Vector3(curr_location.x, curr_location.y, curr_location.z)
 	bar.note_scale = note_scale
@@ -51,9 +62,13 @@ func get_bar_data():
 	
 	
 func remove_bar(bar):
+	#print("REMOVING BAR")
 	bar.queue_free()
 	bars.erase(bar)
+	if(len(bars) == 0) and curr_bar_ind == max_indx:
+		game.get_node("ui_node").is_finished()
+		game.map_finished()
 	
-func add_bars():
-	for i in range(6):
+func add_bars(var l):
+	for _i in range(l):
 		add_bar()

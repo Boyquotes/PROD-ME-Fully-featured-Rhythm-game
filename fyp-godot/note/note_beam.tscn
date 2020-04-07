@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [sub_resource type="QuadMesh" id=1]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.510204, 1 )
-colors = PoolColorArray( 0, 0, 0, 1, 0.150581, 0.896484, 0.573066, 1, 0, 0, 0, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.425781, 0.425781, 0.425781, 1, 0, 0, 0, 1 )
 
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
@@ -20,9 +20,17 @@ emission_operator = 0
 emission_on_uv2 = false
 emission_texture = SubResource( 3 )
 
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0, 0, 0, 1 )
+
 [node name="note_long" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 4 )
+
+[node name="undermesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 5 )

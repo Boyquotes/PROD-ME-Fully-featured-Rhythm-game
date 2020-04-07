@@ -15,20 +15,22 @@ __meta__ = {
 }
 
 [node name="Max combo label" type="Label" parent="."]
-margin_left = 421.899
-margin_top = 11.3818
-margin_right = 496.899
-margin_bottom = 25.3818
+margin_left = 10.8991
+margin_top = 102.382
+margin_right = 85.8991
+margin_bottom = 116.382
+custom_fonts/font = ExtResource( 1 )
 text = "Max Combo"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="max_combo" type="Label" parent="."]
-margin_left = 423.614
-margin_top = 24.2425
-margin_right = 498.614
-margin_bottom = 38.2425
+margin_left = 16.6139
+margin_top = 142.243
+margin_right = 124.614
+margin_bottom = 187.243
+custom_fonts/font = ExtResource( 1 )
 text = "000000"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,6 +67,28 @@ custom_fonts/font = ExtResource( 1 )
 text = "0000"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accuracy_label" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 198.0
+margin_right = 190.0
+margin_bottom = 243.0
+custom_fonts/font = ExtResource( 1 )
+text = "Accuracy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Acc" type="Label" parent="."]
+margin_left = 13.6832
+margin_top = 242.199
+margin_right = 193.683
+margin_bottom = 287.199
+custom_fonts/font = ExtResource( 1 )
+text = "00.00%"
 __meta__ = {
 "_edit_use_anchors_": false
 }

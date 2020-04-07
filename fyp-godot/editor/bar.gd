@@ -140,9 +140,6 @@ func get_note_after(x_pos):
 	return null
 
 func _on_Control_gui_input(e):
-	if editor and editor.grab_cursor_slider_focus(e):
-		return 
-		
 	if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT and e.pressed) or (e is InputEventScreenTouch):
 		print("bar " + str(index) + " Clicked at", e.position)
 		var i = floor(e.position.x / float(EDITOR_C.CELL_WIDTH))
