@@ -16,6 +16,7 @@ var hit_notes_perfect
 var hit_notes_great
 var hit_notes_ok
 var hit_notes_miss
+var map
 
 var final_stats
 
@@ -53,6 +54,7 @@ func reset():
 func add_score():
 	score = score + (score_acc +(score_acc * combo / 25))
 	
+# warning-ignore:shadowed_variable
 func hit_continued_feedback(acc):
 		acc = 4 - acc
 		score = score + (acc * combo * 5)
@@ -96,6 +98,7 @@ func is_finished():
 		score = score, 
 		combo = max_combo,
 		accuracy = acc,
+		map = GAME_C.map_selected.song_folder
 	}
 	
 	GAME_C.map_done_score = final_stats

@@ -17,6 +17,7 @@ onready  var creator_input = get_node("VBoxContainer/Creator_input")
 onready  var artist_input = get_node("VBoxContainer/Artist_input")
 onready  var title_input = get_node("VBoxContainer/Title_input")
 
+# warning-ignore:shadowed_variable
 func setup(audio_file_name, audio_comments):
 	self.audio_file_name = audio_file_name
 	init_audio_inputs(audio_comments)

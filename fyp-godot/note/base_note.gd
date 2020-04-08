@@ -54,8 +54,8 @@ func set_position():
 	
 func add_listeners():
 	$Area.add_to_group("note")
+# warning-ignore:return_value_discarded
 	$Area.connect("area_entered", self,"_on_area_entered")
-	$Area.connect("area_exited", self,"_on_area_exited")
 
 func _on_area_entered(area):
 	if is_hit: return
@@ -81,16 +81,3 @@ func _on_area_entered(area):
 		#is_colliding = false
 		gate = area.get_parent()
 		hit()
-
-func _on_area_exited(area):
-	pass
-	if is_hit: return
-	if area.is_in_group("gate_perfect"):
-		is_colliding = false
-	elif area.is_in_group("gate_great"):
-		is_colliding = false
-	elif area.is_in_group("gate_ok"):
-		is_colliding = false
-	#elif area.is_in_group("gate_miss_late"):
-	#	accuracy = 4
-	#	hit()

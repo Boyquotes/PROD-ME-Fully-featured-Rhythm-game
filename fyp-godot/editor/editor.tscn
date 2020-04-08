@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://theme/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://visualiser_round.gd" type="Script" id=11]
 [ext_resource path="res://editor/Box.gd" type="Script" id=12]
 [ext_resource path="res://menu/LoadingScreen.tscn" type="PackedScene" id=13]
+[ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=14]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -25,6 +26,10 @@
 [sub_resource type="StyleBoxEmpty" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 14 )
 
 [node name="editor" type="Control"]
 anchor_right = 1.0
@@ -82,6 +87,7 @@ popup_exclusive = true
 window_title = "Open a File"
 mode = 0
 access = 2
+filters = PoolStringArray( "*.ogg" )
 show_hidden_files = true
 current_dir = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot"
 current_path = "/Users/konra/Desktop/FYP-Konrad-Knecht/fyp-godot/"
@@ -118,7 +124,7 @@ __meta__ = {
 }
 
 [node name="file_btn_cont" type="HBoxContainer" parent="MarginCont_file"]
-margin_right = 251.0
+margin_right = 254.0
 margin_bottom = 36.0
 
 [node name="import_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
@@ -143,6 +149,15 @@ margin_left = 139.0
 margin_right = 191.0
 margin_bottom = 36.0
 text = "load"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="reset_btn" type="Button" parent="MarginCont_file/file_btn_cont"]
+margin_left = 195.0
+margin_right = 254.0
+margin_bottom = 36.0
+text = "reset"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -204,7 +219,7 @@ margin_bottom = 84.0
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_top = 152.0
 margin_right = 1276.0
-margin_bottom = 709.0
+margin_bottom = 572.0
 rect_min_size = Vector2( 1102, 256 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -214,7 +229,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1276.0
-margin_bottom = 557.0
+margin_bottom = 420.0
 rect_min_size = Vector2( 0, 256 )
 mouse_filter = 0
 size_flags_horizontal = 3
@@ -281,6 +296,18 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
+[node name="Exit_btn" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -97.0
+margin_right = 200.0
+custom_fonts/font = SubResource( 7 )
+text = "Exit"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 
 [node name="LoadingScreen" parent="OverlayLayer" instance=ExtResource( 13 )]
@@ -294,6 +321,7 @@ visible = false
 [connection signal="pressed" from="MarginCont_file/file_btn_cont/import_btn" to="." method="_on_import_btn_pressed"]
 [connection signal="pressed" from="MarginCont_file/file_btn_cont/save_btn" to="." method="_on_save_btn_pressed"]
 [connection signal="pressed" from="MarginCont_file/file_btn_cont/load_btn" to="." method="_on_load_btn_pressed"]
+[connection signal="pressed" from="MarginCont_file/file_btn_cont/reset_btn" to="." method="_on_reset_btn_pressed"]
 [connection signal="pressed" from="MarginCont_play/play_btn_cont/play_btn" to="." method="_on_play_btn_pressed"]
 [connection signal="down" from="MarginCont_zoom/ZoomBtn" to="." method="_on_ZoomBtn_down"]
 [connection signal="up" from="MarginCont_zoom/ZoomBtn" to="." method="_on_ZoomBtn_up"]
@@ -303,3 +331,4 @@ visible = false
 [connection signal="resized" from="ScrollContainer" to="." method="_on_ScrollContainer_resized"]
 [connection signal="value_changed" from="ScrollContainer/VBoxContainer/Waveform/CursorControl/HSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[connection signal="pressed" from="Exit_btn" to="." method="_on_Exit_btn_pressed"]

@@ -61,6 +61,8 @@ onready  var scale_up_btn = get_node("MarginCont_zoom/ZoomBtn/HBoxContainer/Zoom
 onready  var scale_down_btn = get_node("MarginCont_zoom/ZoomBtn/HBoxContainer/ZoomOutBtn")
 onready  var save_map_btn = get_node("MarginCont_file/file_btn_cont/save_btn")
 onready  var import_map_btn = get_node("MarginCont_file/file_btn_cont/load_btn")
+onready  var reser_btn = get_node("MarginCont_file/file_btn_cont/reset_btn")
+onready  var exit_btn = get_node("Exit_btn")
 
 onready  var set_start_input = get_node("MarginCont_timers/start_pos_input")
 
@@ -87,7 +89,7 @@ func _ready():
 func load_editor():
 	editor_thread.start(self, "build_editor", null, 1)
 
-func build_editor(empty):
+func build_editor(_empty):
 	load_percent += 100
 	loading_screen.update_percent(load_percent)
 	
@@ -101,6 +103,7 @@ func build_editor(empty):
 	setup_editor_dir()
 	
 	update_last_file_path(EDITOR_C.last_file_path)
+	editor_thread.wait_to_finish()
 	
 func _process(delta):
 	if pending_wscroll_update:
@@ -171,11 +174,6 @@ func set_params():
 	waveform_scale = track_length / float(EDITOR_C.WAVEFORM_W)
 	waveform_length = track_length
 	
-	print("track_speed:", track_speed)
-	print("w scale:", waveform_scale)
-	print("t len:", track_length)
-	print("w len:", waveform_length)
-	
 	cursor_playback.speed = track_speed
 	
 	waveform_c.set_size(Vector2(waveform_length, EDITOR_C.WAVEFORM_H))
@@ -219,8 +217,6 @@ func cursor_focus():
 	window_scroll.set_h_scroll(cursor_static.get_position().x - EDITOR_C.CURSOR_FOCUS_OFFSET)
 	
 func scale_to(dir):
-	print("****** scale_to ******")
-	
 	if pending_wscroll_update:
 		return 
 	var value = dir * (waveform_scale / 10.0)
@@ -231,16 +227,9 @@ func scale_to(dir):
 	if scale_ratio <= 0 or str(scale_ratio) == "0":
 		scale_ratio = 0.1
 		ui_scale -= value
-		print("scale_ratio:", scale_ratio)
 		return 
 
 	var scale_d = scale_ratio / prev_scale_ratio
-		
-	print("scale to:", dir)
-	print("scale_ratio:", scale_ratio)
-	print("scale_d:", scale_d)
-	print("prev scale: ", prev_scale_ratio)
-	print("ui_scale/curr_Scale: ", ui_scale/curr_scale)
 	
 	var cursor_val = cursor_slider.get_value()
 	var scroll_val = window_scroll.get_h_scroll()
@@ -272,11 +261,7 @@ func scale_to(dir):
 	
 	prev_scale_ratio = scale_ratio
 
-	print("scale updated!")
-
 func _on_HSlider_value_changed(value):
-	print("slider val changed:", value)
-	
 	if tempo_update_in_process:
 		return 
 		
@@ -288,8 +273,6 @@ func _on_HSlider_value_changed(value):
 		stream_player.play(t)
 	
 func _on_tempo_changed():
-	print("_on_tempo_changed:")
-	
 	if track_tempo != tempo_btn.get_tempo():
 		track_tempo = tempo_btn.get_tempo()
 		tempo_update_timeout = 1.0
@@ -332,7 +315,6 @@ func _on_ScrollContainer_resized():
 	
 func show_notice(text):
 	err_notice_dialog.set_text(text)
-	err_notice_dialog.set_as_minsize()
 	err_notice_dialog.popup_centered()
 
 func _on_import_btn_pressed():
@@ -406,7 +388,8 @@ func load_audio(input_file_path):
 	update_last_file_path(input_file_path)
 	update_load_audio(tr("Audio Loaded"))
 	audio_load_thread.wait_to_finish()
-	print("audio loaded")
+	if audio_load_thread.is_active():
+		print("THREAD ACTIVE")
 	
 func update_controls():
 	if audio_loaded:
@@ -464,7 +447,6 @@ func _on_start_pos_input_value_changed(value):
 		t.set_start_position(map_start_pos)
 
 func set_active_track(track):
-	print("SET ACTIVE:", track)
 	if active_track != null:active_track.set_active(false)
 	active_track = track
 	active_track.set_active(true)
@@ -473,9 +455,8 @@ func unset_active_track():
 	if active_track != null:active_track.set_active(false)
 	active_track = null
 
-func grab_cursor_slider_focus(e):
+func grab_cursor_slider_focus(_e):
 	return 
-# warning-ignore:unreachable_code
 
 func set_active_note(note):
 	if active_note != null:active_note.set_active(false)
@@ -523,6 +504,7 @@ func copy_audio(input_file_path):
 
 func export_data():
 	var songs_dir = "songs"
+# warning-ignore:unused_variable
 	var song_file
 	var song_folder
 	var new_dir
@@ -539,6 +521,7 @@ func export_data():
 	print(song_folder)
 	dir.make_dir(song_folder)
 	new_dir = songs_dir + "/" + song_folder
+	var final_song_folder = new_dir
 	dir.open(new_dir)
 	
 	var tracks_data = []
@@ -551,6 +534,7 @@ func export_data():
 		audio_file = map_info_dialog.audio_info.artist + "-" + map_info_dialog.audio_info.title + ".ogg",
 		date = get_curr_date(), 
 		tempo = track_tempo, 
+		song_folder = final_song_folder,
 		start_pos = map_start_pos * EDITOR_C.CELL_EXPORT_SCALE, 
 		tracks = tracks_data, 
 	}
@@ -608,6 +592,7 @@ func import_data(path):
 	track_tempo = int(data.tempo)
 	tempo_btn.set_tempo(track_tempo)
 
+# warning-ignore:integer_division
 	map_start_pos = int(int(data.start_pos) / EDITOR_C.CELL_EXPORT_SCALE)
 	set_start_input.input.set_value(map_start_pos)
 
@@ -655,3 +640,10 @@ func _on_MapInfo_about_to_show():
 
 func _on_MapInfo_popup_hide():
 	popup_active = false
+
+
+func _on_Exit_btn_pressed():
+	get_tree().change_scene("res://menu/MainMenu.tscn")
+
+func _on_reset_btn_pressed():
+	get_tree().change_scene("res://editor/editor.tscn")

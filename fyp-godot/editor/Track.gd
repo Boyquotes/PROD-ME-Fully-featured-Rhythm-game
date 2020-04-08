@@ -31,6 +31,7 @@ func _process(_delta):
 		update_start_position()
 		start_pos_updated = true
 
+# warning-ignore:shadowed_variable
 func setup(bars_count, update_existing = false):
 	self.bars_count = bars_count
 	if update_existing:respawn_bars()
@@ -99,6 +100,7 @@ func add_bar(x, index, quarters_count):
 
 
 func get_data():
+# warning-ignore:shadowed_variable
 	var bars_data = []
 	for b in bars:
 		bars_data.append({

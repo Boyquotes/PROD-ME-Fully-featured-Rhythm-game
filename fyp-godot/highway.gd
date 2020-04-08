@@ -14,6 +14,7 @@ var scaled_bar_amnt
 var max_indx
 var game
 
+# warning-ignore:shadowed_variable
 func setup(game):
 	self.game = game
 	speed = Vector3(0,0,game.speed)

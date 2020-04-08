@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://menu/score_screen.png" type="Texture" id=1]
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://menu/map_finish_menu.gd" type="Script" id=3]
+[ext_resource path="res://addons/gamejolt_api_v2/main.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
 font_data = ExtResource( 2 )
 
 [node name="map_finish_menu" type="Control"]
@@ -15,6 +20,11 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameJoltAPI" type="HTTPRequest" parent="."]
+script = ExtResource( 4 )
+private_key = "698ecd33e7b68a3c749016ce1770c95d"
+game_id = "483664"
 
 [node name="score_screen" type="Sprite" parent="."]
 position = Vector2( 337.563, 359.279 )
@@ -50,3 +60,43 @@ margin_right = 467.575
 margin_bottom = 486.645
 custom_fonts/font = SubResource( 1 )
 text = "acc"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -397.0
+margin_top = 5.5
+margin_right = -131.0
+margin_bottom = 264.5
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="try_again_btn" type="Button" parent="VBoxContainer"]
+margin_right = 266.0
+margin_bottom = 73.0
+custom_fonts/font = SubResource( 2 )
+text = "Retry"
+flat = true
+
+[node name="song_select_btn" type="Button" parent="VBoxContainer"]
+margin_top = 93.0
+margin_right = 266.0
+margin_bottom = 166.0
+custom_fonts/font = SubResource( 2 )
+text = "Song Select"
+flat = true
+
+[node name="main_btn" type="Button" parent="VBoxContainer"]
+margin_top = 186.0
+margin_right = 266.0
+margin_bottom = 259.0
+custom_fonts/font = SubResource( 2 )
+text = "Main Menu"
+flat = true
+[connection signal="pressed" from="VBoxContainer/try_again_btn" to="." method="_on_try_again_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/song_select_btn" to="." method="_on_song_select_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/main_btn" to="." method="_on_main_btn_pressed"]

@@ -1,20 +1,96 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/SongMenu.gd" type="Script" id=2]
+[ext_resource path="res://addons/gamejolt_api_v2/main.gd" type="Script" id=3]
+[ext_resource path="res://menu/bg_loop.gd" type="Script" id=4]
+[ext_resource path="res://menu/bg.webm" type="VideoStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
-size = 64
+size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 48
+size = 64
 font_data = ExtResource( 1 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 4
+tonemap_mode = 2
+adjustment_enabled = true
+adjustment_brightness = 0.89
+adjustment_contrast = 1.18
+adjustment_saturation = 1.29
 
 [node name="SongMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoCont" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoPlayer" type="VideoPlayer" parent="VideoCont"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stream = ExtResource( 5 )
+autoplay = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameJoltAPI" type="HTTPRequest" parent="."]
+script = ExtResource( 3 )
+private_key = "698ecd33e7b68a3c749016ce1770c95d"
+game_id = "483664"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -420.0
+margin_bottom = 720.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RankingLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -470.0
+margin_right = -380.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 1 )
+text = "Ranking"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreCont" type="ScrollContainer" parent="."]
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 46.0
+margin_right = 412.0
+margin_bottom = -84.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScoreCont"]
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,37 +107,14 @@ __meta__ = {
 [node name="back_btn" type="Button" parent="ButtonCont"]
 margin_right = 153.0
 margin_bottom = 94.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Back"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonCont2" type="VBoxContainer" parent="."]
-margin_right = 359.0
-margin_bottom = 88.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="ButtonCont2"]
-margin_right = 359.0
-margin_bottom = 67.0
-custom_fonts/font = SubResource( 2 )
-text = "Leaderboard"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -420.0
-margin_bottom = 720.0
-scroll_horizontal_enabled = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+[connection signal="api_scores_fetched" from="GameJoltAPI" to="." method="_on_GameJoltAPI_api_scores_fetched"]
+[connection signal="pressed" from="ButtonCont/back_btn" to="." method="_on_back_btn_pressed"]

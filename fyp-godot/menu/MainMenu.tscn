@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://visualiser_round.gd" type="Script" id=1]
-[ext_resource path="res://menu/stuck in the sound - lets go.wav" type="AudioStream" id=2]
+[ext_resource path="res://menu/all good things must come to an end (feat endmemory).wav" type="AudioStream" id=2]
 [ext_resource path="res://menu/bg.webm" type="VideoStream" id=3]
 [ext_resource path="res://menu/bg_loop.gd" type="Script" id=4]
 [ext_resource path="res://menu/MainMenu.shader" type="Shader" id=5]
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://menu/MainMenu.gd" type="Script" id=7]
+[ext_resource path="res://menu/settings.gd" type="Script" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -21,23 +22,14 @@ blend_mode = 1
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 1
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.443137, 0.443137, 0.443137, 1 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.305882, 0.305882, 0.305882, 1 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.45098, 0.45098, 0.45098, 1 )
-
-[sub_resource type="StyleBoxFlat" id=8]
-
 [sub_resource type="DynamicFont" id=9]
 size = 32
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = 1
 font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=8]
 
 [sub_resource type="Environment" id=10]
 background_mode = 4
@@ -49,7 +41,29 @@ adjustment_brightness = 0.79
 adjustment_contrast = 1.27
 adjustment_saturation = 1.53
 
+[sub_resource type="DynamicFont" id=13]
+size = 18
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=14]
+default_font = SubResource( 13 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.137255, 0.137255, 0.137255, 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 24
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 48
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
 [node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -57,16 +71,16 @@ __meta__ = {
 
 [node name="VideoCont" type="Control" parent="."]
 light_mask = 0
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VideoPlayer" type="VideoPlayer" parent="VideoCont"]
 light_mask = 0
-margin_right = 1281.0
-margin_bottom = 721.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 stream = ExtResource( 3 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -76,8 +90,8 @@ __meta__ = {
 [node name="BlurFX" type="ColorRect" parent="VideoCont"]
 light_mask = 0
 material = SubResource( 1 )
-margin_right = 1299.0
-margin_bottom = 778.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -86,8 +100,8 @@ __meta__ = {
 
 [node name="Visualizers" type="Control" parent="."]
 material = SubResource( 2 )
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -120,10 +134,8 @@ is_inverted = true
 accel = 10
 
 [node name="Menu_btns" type="Control" parent="."]
-margin_left = -124.0
-margin_top = -79.0
-margin_right = 323.0
-margin_bottom = 202.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -133,16 +145,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 454.927
-margin_top = 185.308
-margin_right = 627.927
-margin_bottom = 253.308
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
+margin_left = -86.5
+margin_top = -90.0
+margin_right = 86.5
+margin_bottom = -22.0
 custom_fonts/font = SubResource( 9 )
 text = "Play"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -152,16 +161,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 454.927
-margin_top = 264.308
-margin_right = 627.927
-margin_bottom = 332.308
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
+margin_left = -86.5
+margin_top = -9.0
+margin_right = 86.5
+margin_bottom = 59.0
 custom_styles/normal = SubResource( 8 )
 custom_fonts/font = SubResource( 9 )
 text = "Editor"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings_btn" type="Button" parent="Menu_btns"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -86.5
+margin_top = 70.0
+margin_right = 86.5
+margin_bottom = 138.0
+custom_fonts/font = SubResource( 9 )
+text = "Settings"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -171,21 +194,175 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 454.927
-margin_top = 345.308
-margin_right = 627.927
-margin_bottom = 413.308
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
+margin_left = 400.369
+margin_top = 247.264
+margin_right = 573.369
+margin_bottom = 315.264
 custom_fonts/font = SubResource( 9 )
 text = "Exit"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 10 )
+
+[node name="settings" type="CanvasLayer" parent="."]
+
+[node name="settings" type="Control" parent="settings"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -842.0
+theme = SubResource( 14 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="settings/settings"]
+modulate = Color( 0, 0, 0, 0.392157 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="settings/settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 59.0
+margin_right = -25.0
+margin_bottom = -135.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player_label" type="Label" parent="settings/settings/VBoxContainer"]
+margin_right = 399.0
+margin_bottom = 26.0
+text = "Player Settings"
+align = 1
+
+[node name="player_cont" type="VBoxContainer" parent="settings/settings/VBoxContainer"]
+margin_top = 30.0
+margin_right = 399.0
+margin_bottom = 96.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="settings/settings/VBoxContainer/player_cont"]
+margin_right = 399.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="settings/settings/VBoxContainer/player_cont/HBoxContainer"]
+margin_right = 61.0
+margin_bottom = 26.0
+text = "Name: "
+
+[node name="LineEdit" type="LineEdit" parent="settings/settings/VBoxContainer/player_cont/HBoxContainer"]
+margin_left = 65.0
+margin_right = 365.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 300, 0 )
+custom_styles/normal = SubResource( 15 )
+placeholder_text = "Player Name"
+placeholder_alpha = 0.195
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="settings/settings/VBoxContainer/player_cont"]
+margin_top = 30.0
+margin_right = 399.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="settings/settings/VBoxContainer/player_cont/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 133.0
+margin_bottom = 31.0
+text = "Approach Rate: "
+
+[node name="SpinBox" type="SpinBox" parent="settings/settings/VBoxContainer/player_cont/HBoxContainer2"]
+margin_left = 137.0
+margin_right = 223.0
+margin_bottom = 36.0
+
+[node name="keybinds_label" type="Label" parent="settings/settings/VBoxContainer"]
+margin_top = 100.0
+margin_right = 399.0
+margin_bottom = 126.0
+text = "Keybinds"
+align = 1
+
+[node name="keybind_cont" type="VBoxContainer" parent="settings/settings/VBoxContainer"]
+margin_top = 130.0
+margin_right = 399.0
+margin_bottom = 130.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="note_cont" type="Label" parent="settings/settings/VBoxContainer"]
+margin_top = 134.0
+margin_right = 399.0
+margin_bottom = 160.0
+text = "Notes"
+align = 1
+
+[node name="notes_cont" type="VBoxContainer" parent="settings/settings/VBoxContainer"]
+margin_top = 164.0
+margin_right = 399.0
+margin_bottom = 164.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="settings/settings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -219.0
+margin_right = 219.0
+margin_bottom = 34.0
+custom_fonts/font = SubResource( 11 )
+text = "Personalize your settings"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cancel_btn" type="Button" parent="settings/settings"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -196.0
+margin_top = -99.0
+margin_right = -36.0
+margin_bottom = -26.0
+custom_fonts/font = SubResource( 12 )
+text = "Cancel"
+flat = true
+
+[node name="save_btn" type="Button" parent="settings/settings"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 72.0
+margin_top = -99.0
+margin_right = 188.0
+margin_bottom = -26.0
+custom_fonts/font = SubResource( 12 )
+text = "Save"
+flat = true
 [connection signal="pressed" from="Menu_btns/Play_btn" to="." method="_on_Play_btn_pressed"]
 [connection signal="pressed" from="Menu_btns/Editor_btn" to="." method="_on_Editor_btn_pressed"]
+[connection signal="pressed" from="Menu_btns/settings_btn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="Menu_btns/Exit_btn" to="." method="_on_Exit_btn_pressed"]
+[connection signal="pressed" from="settings/settings/cancel_btn" to="settings/settings" method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="settings/settings/save_btn" to="settings/settings" method="_on_save_btn_pressed"]

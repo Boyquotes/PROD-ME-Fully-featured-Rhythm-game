@@ -21,9 +21,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
+SETTINGS="*res://menu/user_settings.gd"
 EDITOR_C="*res://editor/editor_c.gd"
-Utils="*res://editor/utils.gd"
 GAME_C="*res://game/game_c.gd"
+Utils="*res://editor/utils.gd"
 
 [display]
 
@@ -35,7 +36,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "gdutils" )
+enabled=PoolStringArray( "gamejolt_api_v2" )
 
 [input]
 

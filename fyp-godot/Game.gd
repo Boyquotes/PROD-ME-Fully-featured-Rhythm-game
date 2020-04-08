@@ -54,7 +54,6 @@ func load_map():
 	var file = File.new()
 	file.open(map_file, File.READ)
 	var content = file.get_as_text()
-	var note_count = 0
 	file.close()
 	load_percent += 25
 	loading_screen.update_percent(load_percent)
@@ -66,11 +65,12 @@ func setup_nodes():
 	load_percent += 25
 	loading_screen.update_percent(load_percent)
 	
-func build_map(empty):
+func build_map(_empty):
 	load_percent += 25
 	loading_screen.update_percent(load_percent)
 	map_thread.wait_to_finish()
 
 func map_finished():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://menu/map_finish_menu.tscn")
 	

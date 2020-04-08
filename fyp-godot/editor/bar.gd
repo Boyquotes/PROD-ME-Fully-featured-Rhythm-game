@@ -58,8 +58,10 @@ func clear_notes():
 func set_notes_data(notes_data):
 	clear_notes()
 	for data in notes_data:
+# warning-ignore:integer_division
 		var x = int(int(data.pos) / EDITOR_C.CELL_EXPORT_SCALE)
 		var n = add_note(x)
+# warning-ignore:integer_division
 		n.set_width(int(data.len) / EDITOR_C.CELL_EXPORT_SCALE)
 
 func get_notes_data():
@@ -125,6 +127,7 @@ func get_next_bar():
 		return track.bars[index + 1]
 	else :return null
 
+# warning-ignore:shadowed_variable
 func get_note_after(x_pos):
 	if notes.size() > 0:
 		var next = []
