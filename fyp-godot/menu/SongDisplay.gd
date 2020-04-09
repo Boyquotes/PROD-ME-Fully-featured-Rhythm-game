@@ -4,6 +4,9 @@ var song
 onready var menu = get_tree().get_root().get_node("SongMenu")
 
 func _on_Button_pressed():
+	$sound_hit.play()
+	GAME_C.map_selected = song
+	menu.set_selected_map()
 	self.set_scale(Vector2(1.1,1.1))
 	
 func _input(event):
@@ -19,6 +22,13 @@ func _on_Button_focus_exited():
 
 func _on_Button_focus_entered():
 	$Sprite.modulate = Color("#B1AED5")
-	GAME_C.map_selected = song
-	menu.set_selected_map()
 	menu.play_song(song.audio_file)
+
+
+func _on_Button_mouse_entered():
+	self.set_scale(Vector2(1.05,1.05))
+	$sound.play()
+
+
+func _on_Button_mouse_exited():
+	self.set_scale(Vector2(1,1))

@@ -1,11 +1,24 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://skin/ranking-panel@2x.png" type="Texture" id=1]
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://menu/map_finish_menu.gd" type="Script" id=3]
 [ext_resource path="res://addons/gamejolt_api_v2/main.gd" type="Script" id=4]
-[ext_resource path="res://skin/menu-back@2x.png" type="Texture" id=5]
+[ext_resource path="res://animtions/menu-back-3.png" type="Texture" id=5]
 [ext_resource path="res://skin/pause-retry@2x.png" type="Texture" id=6]
+[ext_resource path="res://animtions/hit50.png" type="Texture" id=7]
+[ext_resource path="res://animtions/hit300.png" type="Texture" id=8]
+[ext_resource path="res://animtions/hit0.png" type="Texture" id=9]
+[ext_resource path="res://animtions/hit100.png" type="Texture" id=10]
+[ext_resource path="res://animtions/menu-back-2.png" type="Texture" id=11]
+[ext_resource path="res://animtions/menu-back-5.png" type="Texture" id=12]
+[ext_resource path="res://animtions/menu-back-1.png" type="Texture" id=13]
+[ext_resource path="res://animtions/menu-back-4.png" type="Texture" id=14]
+[ext_resource path="res://animtions/menu-back-0.png" type="Texture" id=15]
+[ext_resource path="res://animtions/menu-back-6.png" type="Texture" id=16]
+[ext_resource path="res://skin/menuclick.wav" type="AudioStream" id=17]
+[ext_resource path="res://skin/menuback.wav" type="AudioStream" id=18]
+[ext_resource path="res://skin/Applause.wav" type="AudioStream" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -14,6 +27,14 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=2]
 size = 48
 font_data = ExtResource( 2 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
 
 [node name="map_finish_menu" type="Control"]
 anchor_right = 1.0
@@ -29,15 +50,100 @@ private_key = "698ecd33e7b68a3c749016ce1770c95d"
 game_id = "483664"
 
 [node name="score_screen" type="Sprite" parent="."]
-position = Vector2( 641.908, 417.206 )
+position = Vector2( 641.081, 424.206 )
 scale = Vector2( 0.451264, 0.451264 )
 texture = ExtResource( 1 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1283.0
+margin_bottom = 123.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="score" type="Label" parent="."]
-margin_left = 131.452
-margin_top = 44.0907
-margin_right = 276.452
-margin_bottom = 78.0907
+margin_left = 121.766
+margin_top = 149.969
+margin_right = 266.766
+margin_bottom = 183.969
+custom_fonts/font = SubResource( 1 )
+text = "FINAL SCORE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="300x" type="Label" parent="."]
+margin_left = 117.951
+margin_top = 249.081
+margin_right = 262.951
+margin_bottom = 283.081
+custom_fonts/font = SubResource( 1 )
+text = "FINAL SCORE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="100x" type="Label" parent="."]
+margin_left = 367.746
+margin_top = 251.524
+margin_right = 512.746
+margin_bottom = 285.524
+custom_fonts/font = SubResource( 1 )
+text = "FINAL SCORE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="50x" type="Label" parent="."]
+margin_left = 103.032
+margin_top = 343.749
+margin_right = 248.032
+margin_bottom = 377.749
+custom_fonts/font = SubResource( 1 )
+text = "FINAL SCORE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="beatmap" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 14.0
+margin_right = 233.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 1 )
+text = "Beatmap - beatmap"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mapper" type="Label" parent="."]
+margin_left = 13.7351
+margin_top = 46.3439
+margin_right = 232.735
+margin_bottom = 80.3439
+custom_fonts/font = SubResource( 1 )
+text = "beatmpa by mapper"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="played by" type="Label" parent="."]
+margin_left = 15.0
+margin_top = 80.0
+margin_right = 288.0
+margin_bottom = 114.0
+custom_fonts/font = SubResource( 1 )
+text = "played by player on date"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="missx" type="Label" parent="."]
+margin_left = 345.867
+margin_top = 344.563
+margin_right = 490.867
+margin_bottom = 378.563
 custom_fonts/font = SubResource( 1 )
 text = "FINAL SCORE"
 __meta__ = {
@@ -45,10 +151,10 @@ __meta__ = {
 }
 
 [node name="combo" type="Label" parent="."]
-margin_left = 25.4444
-margin_top = 448.777
-margin_right = 170.444
-margin_bottom = 482.777
+margin_left = 51.0
+margin_top = 509.0
+margin_right = 129.0
+margin_bottom = 543.0
 custom_fonts/font = SubResource( 1 )
 text = "combo"
 __meta__ = {
@@ -56,33 +162,71 @@ __meta__ = {
 }
 
 [node name="acc" type="Label" parent="."]
-margin_left = 322.575
-margin_top = 452.645
-margin_right = 467.575
-margin_bottom = 486.645
+margin_left = 293.0
+margin_top = 508.0
+margin_right = 331.0
+margin_bottom = 542.0
 custom_fonts/font = SubResource( 1 )
 text = "acc"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="song_select_btn" type="Button" parent="."]
-margin_left = 0.0733032
-margin_top = 529.243
-margin_right = 460.073
-margin_bottom = 715.243
+margin_left = 3.0
+margin_top = 639.0
+margin_right = 206.0
+margin_bottom = 720.0
 custom_fonts/font = SubResource( 2 )
-icon = ExtResource( 5 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AnimatedSprite" type="AnimatedSprite" parent="song_select_btn"]
+position = Vector2( 119.162, 0.773743 )
+frames = SubResource( 3 )
+frame = 2
+playing = true
+
 [node name="try_again_btn" type="Button" parent="."]
-margin_left = 836.0
-margin_top = 130.0
-margin_right = 1790.0
-margin_bottom = 380.0
+margin_left = 735.144
+margin_top = 440.123
+margin_right = 1158.14
+margin_bottom = 690.123
 custom_fonts/font = SubResource( 2 )
-text = "Retry"
 icon = ExtResource( 6 )
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hit0" type="Sprite" parent="."]
+position = Vector2( 321.538, 360.136 )
+texture = ExtResource( 9 )
+
+[node name="hit50" type="Sprite" parent="."]
+position = Vector2( 62.0511, 360.871 )
+texture = ExtResource( 7 )
+
+[node name="hit100" type="Sprite" parent="."]
+position = Vector2( 323.743, 266.044 )
+texture = ExtResource( 10 )
+
+[node name="hit300" type="Sprite" parent="."]
+position = Vector2( 67.1967, 263.104 )
+texture = ExtResource( 8 )
+
+[node name="back" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+
+[node name="hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[node name="Map_done" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+bus = "ui"
+[connection signal="mouse_entered" from="song_select_btn" to="." method="_on_song_select_btn_mouse_entered"]
 [connection signal="pressed" from="song_select_btn" to="." method="_on_song_select_btn_pressed"]
+[connection signal="mouse_entered" from="try_again_btn" to="." method="_on_try_again_btn_mouse_entered"]
 [connection signal="pressed" from="try_again_btn" to="." method="_on_try_again_btn_pressed"]

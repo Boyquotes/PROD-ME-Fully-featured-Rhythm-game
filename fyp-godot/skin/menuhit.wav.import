@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/menuhit.wav-39eedbec80ce3708c4684129cc2ea98f.sample"
+
+[deps]
+
+source_file="res://skin/menuhit.wav"
+dest_files=[ "res://.import/menuhit.wav-39eedbec80ce3708c4684129cc2ea98f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

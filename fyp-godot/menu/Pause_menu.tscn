@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://menu/Pause_menu.gd" type="Script" id=1]
 [ext_resource path="res://menu/MainMenu.shader" type="Shader" id=2]
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://skin/pause-continue@2x.png" type="Texture" id=4]
+[ext_resource path="res://skin/pause-retry@2x.png" type="Texture" id=5]
+[ext_resource path="res://skin/pause-back.png" type="Texture" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -14,7 +17,6 @@ font_data = ExtResource( 3 )
 
 [node name="Pause_menu" type="Control"]
 pause_mode = 2
-visible = false
 margin_right = 1290.0
 margin_bottom = 737.0
 script = ExtResource( 1 )
@@ -47,42 +49,42 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -127.0
-margin_top = -145.0
-margin_right = 127.0
-margin_bottom = 145.0
+margin_left = -211.5
+margin_top = -196.0
+margin_right = 211.5
+margin_bottom = 196.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Btn_resume" type="Button" parent="VBoxContainer"]
-margin_right = 254.0
-margin_bottom = 94.0
+margin_right = 423.0
+margin_bottom = 128.0
 custom_fonts/font = SubResource( 2 )
-text = "Resume"
+icon = ExtResource( 4 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Btn_retry" type="Button" parent="VBoxContainer"]
-margin_top = 98.0
-margin_right = 254.0
-margin_bottom = 192.0
+margin_top = 132.0
+margin_right = 423.0
+margin_bottom = 260.0
 custom_fonts/font = SubResource( 2 )
-text = "Retry"
+icon = ExtResource( 5 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Btn_quit" type="Button" parent="VBoxContainer"]
-margin_top = 196.0
-margin_right = 254.0
-margin_bottom = 290.0
+margin_top = 264.0
+margin_right = 423.0
+margin_bottom = 392.0
 custom_fonts/font = SubResource( 2 )
-text = "Quit"
+icon = ExtResource( 6 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false

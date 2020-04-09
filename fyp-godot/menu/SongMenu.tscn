@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/SongMenu.gd" type="Script" id=2]
@@ -9,20 +9,22 @@
 [ext_resource path="res://skin/menu-back@2x.png" type="Texture" id=7]
 [ext_resource path="res://visualiser_round.gd" type="Script" id=8]
 [ext_resource path="res://menu/MainMenu.shader" type="Shader" id=9]
+[ext_resource path="res://skin/menuclick.wav" type="AudioStream" id=10]
+[ext_resource path="res://skin/menuback.wav" type="AudioStream" id=11]
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
 shader_param/blurSize = 20
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 64
 font_data = ExtResource( 1 )
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=4]
 background_mode = 4
 tonemap_mode = 2
 adjustment_enabled = true
@@ -30,7 +32,7 @@ adjustment_brightness = 0.89
 adjustment_contrast = 1.18
 adjustment_saturation = 1.29
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 38
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -62,7 +64,7 @@ __meta__ = {
 }
 
 [node name="fx" type="ColorRect" parent="VideoCont"]
-material = SubResource( 5 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 33.0
@@ -124,7 +126,7 @@ anchor_right = 0.5
 margin_left = -470.0
 margin_right = -380.0
 margin_bottom = 34.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Ranking"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -165,7 +167,7 @@ __meta__ = {
 [node name="back_btn" type="Button" parent="ButtonCont"]
 margin_right = 236.0
 margin_bottom = 96.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 icon = ExtResource( 7 )
 flat = true
 __meta__ = {
@@ -173,7 +175,7 @@ __meta__ = {
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
+environment = SubResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -182,11 +184,18 @@ margin_left = 577.0
 margin_top = 648.0
 margin_right = 855.0
 margin_bottom = 767.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "PLayerName
 "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="menu2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
 [connection signal="api_scores_fetched" from="GameJoltAPI" to="." method="_on_GameJoltAPI_api_scores_fetched"]
+[connection signal="mouse_entered" from="ButtonCont/back_btn" to="." method="_on_back_btn_mouse_entered"]
 [connection signal="pressed" from="ButtonCont/back_btn" to="." method="_on_back_btn_pressed"]

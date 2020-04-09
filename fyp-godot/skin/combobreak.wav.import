@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/combobreak.wav-4dc114f11403cf1e23c7c913cce1f6b5.sample"
+
+[deps]
+
+source_file="res://skin/combobreak.wav"
+dest_files=[ "res://.import/combobreak.wav-4dc114f11403cf1e23c7c913cce1f6b5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

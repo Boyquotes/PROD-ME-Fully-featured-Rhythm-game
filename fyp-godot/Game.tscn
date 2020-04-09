@@ -13,18 +13,18 @@
 size = Vector3( 25, 1, 1 )
 
 [sub_resource type="Environment" id=2]
+background_mode = 1
 ambient_light_color = Color( 0.764706, 0.764706, 0.764706, 1 )
-glow_intensity = 3.4
-glow_strength = 0.77
-glow_bloom = 0.46
-glow_hdr_threshold = 4.0
-glow_hdr_luminance_cap = 65.87
-glow_hdr_scale = 1.63
+dof_blur_far_distance = 150.0
+dof_blur_far_transition = 650.9
+dof_blur_far_quality = 2
+glow_intensity = 4.78
+glow_strength = 0.57
+glow_blend_mode = 0
 glow_bicubic_upscale = true
 adjustment_enabled = true
-adjustment_brightness = 0.75
-adjustment_contrast = 1.41
-adjustment_saturation = 1.5
+adjustment_brightness = 0.8
+adjustment_contrast = 1.2
 
 [node name="Game" type="Spatial"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 38.8181 )
@@ -63,9 +63,10 @@ cycle_colors = true
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 
 [node name="LoadingScreen" parent="OverlayLayer" instance=ExtResource( 7 )]
+visible = false
 
 [node name="Pause_menu" parent="OverlayLayer" instance=ExtResource( 6 )]
-visible = true
+visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, -147.088, -309.249 )
@@ -73,10 +74,7 @@ pixel_size = 0.8
 texture = ExtResource( 8 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 38.3865, -18.9533 )
-light_energy = 0.8
-light_indirect_energy = 2.0
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 23.8653, -8.25228 )
 light_specular = 1.0
-shadow_enabled = true
-omni_range = 155.1
-omni_attenuation = 1.27456
+omni_range = 100.0
+omni_attenuation = 1.62451

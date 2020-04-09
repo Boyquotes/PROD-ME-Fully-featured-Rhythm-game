@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Lia-My Soul Your Beats.ogg-397a2fe7e7b6a16dc2e4ca330d828e01.oggstr"
+
+[deps]
+
+source_file="res://songs/2569677164 Lia-My Soul Your Beats/Lia-My Soul Your Beats.ogg"
+dest_files=[ "res://.import/Lia-My Soul Your Beats.ogg-397a2fe7e7b6a16dc2e4ca330d828e01.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

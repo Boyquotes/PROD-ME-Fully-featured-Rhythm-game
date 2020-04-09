@@ -90,6 +90,8 @@ func hit_feedback(accuracy):
 		combo_anim()
 		hit_feedback_cont.hit_feedback(value)
 	elif accuracy == 4:
+		if combo >= 30:
+			$break.play()
 		value = 3
 		score_acc = 0
 		combo = 0
@@ -104,7 +106,15 @@ func is_finished():
 		map = GAME_C.map_selected.song_folder
 	}
 	
+	var note_stats = {
+		hit_notes_perfect = hit_notes_perfect,
+		hit_notes_great = hit_notes_great,
+		hit_notes_ok = hit_notes_ok,
+		hit_notes_miss = hit_notes_miss
+	}
+	
 	GAME_C.map_done_score = final_stats
+	GAME_C.note_stats = note_stats
 
 func combo_anim():
 	$AnimationPlayer.play("combo_anim")

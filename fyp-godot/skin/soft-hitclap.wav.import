@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/soft-hitclap.wav-daf01052cc047f8b574142ecd90ba770.sample"
+
+[deps]
+
+source_file="res://skin/soft-hitclap.wav"
+dest_files=[ "res://.import/soft-hitclap.wav-daf01052cc047f8b574142ecd90ba770.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/SongDisplay.gd" type="Script" id=2]
 [ext_resource path="res://skin/menu-button-background@2x.png" type="Texture" id=3]
+[ext_resource path="res://skin/menuhit.wav" type="AudioStream" id=4]
+[ext_resource path="res://skin/menuclick.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -74,6 +76,16 @@ show_behind_parent = true
 position = Vector2( 366.476, 46.6333 )
 scale = Vector2( 0.480461, 0.504815 )
 texture = ExtResource( 3 )
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "ui"
+
+[node name="sound_hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "ui"
 [connection signal="focus_entered" from="Button" to="." method="_on_Button_focus_entered"]
 [connection signal="focus_exited" from="Button" to="." method="_on_Button_focus_exited"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_Button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

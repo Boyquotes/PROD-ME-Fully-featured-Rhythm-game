@@ -29,6 +29,7 @@ func play_song(path):
 	ogg_file.close()
 	$AudioStreamPlayer.set_stream(stream)
 	$AudioStreamPlayer.play(stream.get_length()/2)
+	
 func set_selected_map():
 	if selected_map != GAME_C.map_selected.song_folder:
 		map_changed = true
@@ -64,9 +65,6 @@ func add_list():
 		item.rect_min_size = Vector2(400, 110)
 		scroll_cont.get_node("VBoxContainer").call_deferred("add_child", item)
 		item.song = song
-
-func free_leaderboatd_list():
-	print(leaderboard_cont.get_node("VBoxContainer").get_child(0).get_name())
 	
 func add_leaderboard_list(data):
 	var score = data.score
@@ -78,6 +76,7 @@ func add_leaderboard_list(data):
 	}
 	score = score.trim_prefix("{").trim_suffix("}")
 	score = score.split(",")
+	print("add_leadeboard:", score)
 	for i in score.size():
 		var new = score[i].split(":")
 		if new[0].strip_edges() == "accuracy":
@@ -107,6 +106,7 @@ func fetch_api():
 	
 func set_scores(data):
 	scores = JSON.parse(data).get_result()
+	print(scores)
 	
 func search_dir(dir_name):
 	var file_names = []
@@ -192,5 +192,8 @@ func parse_song_files():
 
 func _on_back_btn_pressed():
 # warning-ignore:return_value_discarded
+	$menu2.play()
 	get_tree().change_scene("res://menu/MainMenu.tscn")
 	
+func _on_back_btn_mouse_entered():
+	$menu.play()

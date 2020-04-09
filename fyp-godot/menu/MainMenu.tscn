@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://visualiser_round.gd" type="Script" id=1]
 [ext_resource path="res://menu/all good things must come to an end (feat endmemory).wav" type="AudioStream" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://menu/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://menu/settings.gd" type="Script" id=8]
 [ext_resource path="res://settings_tab_open.tres" type="Animation" id=9]
+[ext_resource path="res://skin/menuhit.wav" type="AudioStream" id=10]
+[ext_resource path="res://skin/menuclick.wav" type="AudioStream" id=11]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -157,13 +159,13 @@ __meta__ = {
 
 [node name="Play_btn" type="Button" parent="Menu_btns"]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.423
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.423
 margin_left = -86.5
-margin_top = -92.0
+margin_top = -36.56
 margin_right = 86.5
-margin_bottom = -19.0
+margin_bottom = 36.44
 custom_fonts/font = SubResource( 5 )
 text = "Play"
 flat = true
@@ -227,7 +229,6 @@ environment = SubResource( 7 )
 
 [node name="settings" type="Control" parent="settings"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -842.0
@@ -242,6 +243,7 @@ anims/settings_tab = ExtResource( 9 )
 anims/settings_tab_close = SubResource( 10 )
 
 [node name="Panel" type="Panel" parent="settings/settings"]
+modulate = Color( 0, 0, 0, 0.509804 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -379,9 +381,26 @@ margin_bottom = -26.0
 custom_fonts/font = SubResource( 13 )
 text = "Save"
 flat = true
+
+[node name="button_hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "ui"
+
+[node name="button_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+bus = "ui"
+[connection signal="mouse_entered" from="Menu_btns/Play_btn" to="." method="_on_Play_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Menu_btns/Play_btn" to="." method="_on_Play_btn_mouse_exited"]
 [connection signal="pressed" from="Menu_btns/Play_btn" to="." method="_on_Play_btn_pressed"]
+[connection signal="mouse_entered" from="Menu_btns/Editor_btn" to="." method="_on_Editor_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Menu_btns/Editor_btn" to="." method="_on_Editor_btn_mouse_exited"]
 [connection signal="pressed" from="Menu_btns/Editor_btn" to="." method="_on_Editor_btn_pressed"]
+[connection signal="mouse_entered" from="Menu_btns/settings_btn" to="." method="_on_settings_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Menu_btns/settings_btn" to="." method="_on_settings_btn_mouse_exited"]
 [connection signal="pressed" from="Menu_btns/settings_btn" to="." method="_on_settings_btn_pressed"]
+[connection signal="mouse_entered" from="Menu_btns/Exit_btn" to="." method="_on_Exit_btn_mouse_entered"]
+[connection signal="mouse_exited" from="Menu_btns/Exit_btn" to="." method="_on_Exit_btn_mouse_exited"]
 [connection signal="pressed" from="Menu_btns/Exit_btn" to="." method="_on_Exit_btn_pressed"]
 [connection signal="pressed" from="settings/settings/cancel_btn" to="settings/settings" method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="settings/settings/cancel_btn" to="." method="_on_cancel_btn_pressed"]
 [connection signal="pressed" from="settings/settings/save_btn" to="settings/settings" method="_on_save_btn_pressed"]
