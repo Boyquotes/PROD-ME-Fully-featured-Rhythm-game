@@ -19,6 +19,15 @@ func _ready():
 	add_list()
 	fetch_api()
 	
+func play_song(path):
+	var ogg_file = File.new()
+	ogg_file.open(path, File.READ)
+	var bytes = ogg_file.get_buffer(ogg_file.get_len())
+	var stream = AudioStreamOGGVorbis.new()
+	stream.data = bytes
+	ogg_file.close()
+	$AudioStreamPlayer.set_stream(stream)
+	$AudioStreamPlayer.play(stream.get_length()/2)
 func set_selected_map():
 	if selected_map != GAME_C.map_selected.song_folder:
 		map_changed = true

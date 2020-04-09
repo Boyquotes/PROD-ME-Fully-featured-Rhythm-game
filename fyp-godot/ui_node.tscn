@@ -1,8 +1,31 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular - Copy.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui.gd" type="Script" id=2]
 [ext_resource path="res://accuracy_cont.gd" type="Script" id=3]
+[ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "combo_anim"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("combo:custom_fonts/font:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 38, 32 ]
+}
 
 [node name="ui_node" type="Control"]
 anchor_right = 1.0
@@ -63,7 +86,7 @@ margin_left = 511.384
 margin_top = 403.0
 margin_right = 770.384
 margin_bottom = 720.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0000"
 align = 1
 valign = 1
@@ -101,3 +124,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/combo_anim = SubResource( 1 )

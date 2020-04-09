@@ -16,7 +16,7 @@ var quarter_time
 var speed
 var note_scale
 var start_pos
-export var ar = 200
+var ar = SETTINGS._settings.player.aproach_speed * 10
 var score = 0
 var combo = 0
 

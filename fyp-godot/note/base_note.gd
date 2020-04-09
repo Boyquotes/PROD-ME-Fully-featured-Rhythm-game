@@ -9,10 +9,12 @@ var speed
 var score = 0
 var accuracy
 var multiplier = 1
+var note_color
 
 var is_colliding = false
 var is_hit = false
 var gate
+
 onready var ui = get_tree().get_root().get_node("Game").get_node("ui_node")
 
 func _process(delta):
@@ -32,21 +34,29 @@ func hit():
 	$MeshInstance.hide()
 	is_hit = true
 	gate.is_hitting = false
+	if accuracy != 4:
+		gate.play_anim()
 	gate.note_hit = self
-	#var n = get_node("highway")
-	#print(get_parent().get_name())
 	ui.hit_feedback(accuracy)
 	ui.add_score()
 
+func set_color(color):
+	var material = SpatialMaterial.new() 
+	$MeshInstance.get_surface_material(0)
+	material.albedo_color = color
+	$MeshInstance.set_surface_material(0, material)
 	
 func set_position():
 	var x
 	match line:
 		1:
+#			$MeshInstance.material_override.albedo_color = SETTINGS._settings.note_color.line1
 			x = -1.5
 		2:
+#			$MeshInstance.material_override.albedo_color = SETTINGS._settings.note_color.line2
 			x = -0.5
 		3:
+#			$MeshInstance.material_override.albedo_color = SETTINGS._settings.note_color.line3
 			x = 0.5
 		4: 
 			x = 1.5
@@ -58,7 +68,8 @@ func add_listeners():
 	$Area.connect("area_entered", self,"_on_area_entered")
 
 func _on_area_entered(area):
-	if is_hit: return
+	if is_hit: 
+		return
 	
 	if area.is_in_group("gate_perfect"):
 		accuracy = 1

@@ -6,6 +6,7 @@ onready var btn_script = load("res://menu/keyButton.gd")
 
 var settings
 var buttons = {}
+var color = {}
 
 func _ready():
 	settings = SETTINGS._settings.duplicate()
@@ -69,8 +70,23 @@ func change_settings(key, value):
 
 
 func _on_cancel_btn_pressed():
+	$AnimationPlayer.play("settings_tab_close")
 	get_node(".").hide()
 
 
 func _on_save_btn_pressed():
-	pass # Replace with function body.
+	settings.player.player_name = button_cont.get_node("player_cont/HBoxContainer/LineEdit").get_text()
+	settings.player.aproach_speed = button_cont.get_node("player_cont/HBoxContainer2/SpinBox").get_value()
+	
+	SETTINGS.set_game_binds()
+	
+	for key in settings.note_color.keys():
+		settings.note_color[key] = get_node("VBoxContainer/notes_cont").get_child(int(key) - 1).get_child(1).get_picker().get_pick_color()
+		
+	SETTINGS._settings = settings.duplicate()
+	SETTINGS.save_settings()
+	SETTINGS.load_settings()
+	
+	_on_cancel_btn_pressed()
+	
+	

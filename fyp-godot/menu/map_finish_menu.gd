@@ -2,7 +2,7 @@ extends Control
 
 var score_values
 
-var user_name = GAME_C.player_name
+var user_name = SETTINGS._settings.player.player_name
 
 onready var final_score_cont = get_node("score")
 onready var final_combo_cont = get_node("combo")

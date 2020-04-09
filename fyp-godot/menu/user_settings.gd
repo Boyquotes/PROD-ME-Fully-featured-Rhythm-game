@@ -25,28 +25,8 @@ var _settings = {
 func _ready():
 	load_settings()
 	set_game_binds()
-	print(_settings)
 	
 func save_settings():
-	_settings = {
-	"player":{
-		"player_name": GAME_C.player_name,
-		"aproach_speed": GAME_C.aproach_speed,
-		},
-	"keybinds":{
-		"key1": GAME_C.key1,
-		"key2": GAME_C.key2,
-		"key3": GAME_C.key3,
-		"key4": GAME_C.key4
-		},
-	"note_color":{
-			"line1": GAME_C.line1_color,
-			"line2": GAME_C.line2_color,
-			"line3": GAME_C.line3_color,
-			"line4": GAME_C.line4_color
-		}
-	}
-	
 	for section in _settings.keys():
 		for key in _settings[section]:
 			_config_file.set_value(section, key, _settings[section][key])
@@ -63,7 +43,6 @@ func load_settings():
 func set_game_binds():
 	for key in _settings.keybinds:
 		var value = _settings.keybinds[key]
-		print(value)
 		var actionlist = InputMap.get_action_list(key)
 		if !actionlist.empty():
 			InputMap.action_erase_event(key, actionlist[0])

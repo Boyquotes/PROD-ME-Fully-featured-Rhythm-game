@@ -67,31 +67,34 @@ func calc_acc():
 		acc = "%.2f" %(acc * 100)
 		
 func hit_feedback(accuracy):
-	var text
+	var value
 	if accuracy == 1:
-		text = "Perfect"
+		value = 0 
 		score_acc = 300
 		combo = combo + 1
 		hit_notes_perfect += 1
-		hit_feedback_cont.hit_feedback(text)
+		combo_anim()
+		hit_feedback_cont.hit_feedback(value)
 	elif accuracy == 2:
-		text = "Great"
+		value = 1
 		score_acc = 100
 		combo = combo + 1
 		hit_notes_great += 1
-		hit_feedback_cont.hit_feedback(text)
+		combo_anim()
+		hit_feedback_cont.hit_feedback(value)
 	elif accuracy == 3:
-		text = "Ok"
+		value = 2
 		score_acc = 50
 		combo =combo + 1
 		hit_notes_ok += 1
-		hit_feedback_cont.hit_feedback(text)
+		combo_anim()
+		hit_feedback_cont.hit_feedback(value)
 	elif accuracy == 4:
-		text = "Miss"
+		value = 3
 		score_acc = 0
 		combo = 0
 		hit_notes_miss += 1
-		hit_feedback_cont.hit_feedback(text)
+		hit_feedback_cont.hit_feedback(value)
 	
 func is_finished():
 	final_stats = {
@@ -102,3 +105,6 @@ func is_finished():
 	}
 	
 	GAME_C.map_done_score = final_stats
+
+func combo_anim():
+	$AnimationPlayer.play("combo_anim")

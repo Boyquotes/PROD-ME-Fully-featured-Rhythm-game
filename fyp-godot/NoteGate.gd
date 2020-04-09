@@ -3,12 +3,14 @@ extends Spatial
 export(int, 1,4) var line
 
 onready var mesh = get_node("MeshInstance")
+var gate_scale = Vector3(1, 1, SETTINGS._settings.player.aproach_speed * 0.1 )
 var is_pressed = false
 var is_hitting = false
-var note_hit
+var note_hit 
 
 func _ready():
 	set_process_input(true)
+	$".".set_scale(gate_scale)
 	mesh.hide()
 	
 func _input(event):
@@ -51,3 +53,6 @@ func _process(_delta):
 		mesh.show()
 	else:
 		mesh.hide()
+
+func play_anim():
+	$Animations/AnimationPlayer.play("short_hit")

@@ -6,6 +6,7 @@ var long_note_scene = preload("res://note/long_note.tscn")
 var note_scale
 var bar_data
 var speed
+var color
 
 func _ready():
 	add_notes()
@@ -33,4 +34,15 @@ func add_note(line, data):
 	note.length_scale = note_scale
 	note.speed = speed
 	add_child(note)
-	
+	if line == 1:
+		color = Color(SETTINGS._settings.note_color.line1)
+		note.set_color(color)
+	if line == 2:
+		color = Color(SETTINGS._settings.note_color.line2)
+		note.set_color(color)
+	if line == 3:
+		color = Color(SETTINGS._settings.note_color.line3)
+		note.set_color(color)
+	if line == 4:
+		color = Color(SETTINGS._settings.note_color.line4)
+		note.set_color(color)

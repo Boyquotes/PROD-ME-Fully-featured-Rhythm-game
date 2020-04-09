@@ -17,6 +17,7 @@ func _process(_delta):
 func _on_Btn_resume_pressed():
 	get_tree().paused = false
 	not_paused = true
+	visible = false
 
 func _on_Btn_retry_pressed():
 # warning-ignore:return_value_discarded

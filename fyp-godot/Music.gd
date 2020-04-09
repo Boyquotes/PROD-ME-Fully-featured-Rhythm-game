@@ -28,4 +28,3 @@ func _process(delta):
 		if pre_start_duration <= 0:
 			start()
 			return
-			

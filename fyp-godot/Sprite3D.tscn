@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://menu/bg.webm" type="VideoStream" id=1]
+[ext_resource path="res://menu/bg_loop.gd" type="Script" id=2]
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("Sprite3D/Viewport")
+
+[node name="Sprite3D" type="Sprite3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2448, -228.253 )
+pixel_size = 0.1
+billboard = 1
+double_sided = false
+texture = SubResource( 3 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1280, 720 )
+hdr = false
+render_target_v_flip = true
+
+[node name="VideoPlayer" type="VideoPlayer" parent="Viewport"]
+margin_right = 1280.0
+margin_bottom = 720.0
+stream = ExtResource( 1 )
+script = ExtResource( 2 )

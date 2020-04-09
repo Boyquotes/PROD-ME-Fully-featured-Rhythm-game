@@ -16,4 +16,5 @@ func _on_Exit_btn_pressed():
 
 
 func _on_settings_btn_pressed():
+	$settings/settings/AnimationPlayer.play("settings_tab")
 	get_node("settings/settings").show()

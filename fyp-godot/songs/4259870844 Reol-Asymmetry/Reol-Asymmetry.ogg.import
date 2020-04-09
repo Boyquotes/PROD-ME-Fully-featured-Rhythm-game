@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Reol-Asymmetry.ogg-c9daf6bb4d2fc27cdc7ddf6d63cf4cac.oggstr"
+
+[deps]
+
+source_file="res://songs/4259870844 Reol-Asymmetry/Reol-Asymmetry.ogg"
+dest_files=[ "res://.import/Reol-Asymmetry.ogg-c9daf6bb4d2fc27cdc7ddf6d63cf4cac.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -23,7 +23,7 @@ func setup(game):
 	note_scale = game.note_scale
 	curr_bar_ind = 0
 	track_data = game.map.tracks
-	scaled_bar_amnt = max(ceil(32 / bar_length), 1)
+	scaled_bar_amnt = max(ceil(32 / bar_length), 16)
 	max_indx = 0
 	for t in track_data:
 		max_indx = max(max_indx, len(t.bars))

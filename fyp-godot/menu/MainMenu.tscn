@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://visualiser_round.gd" type="Script" id=1]
 [ext_resource path="res://menu/all good things must come to an end (feat endmemory).wav" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://menu/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://menu/settings.gd" type="Script" id=8]
+[ext_resource path="res://settings_tab_open.tres" type="Animation" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -22,16 +23,16 @@ blend_mode = 1
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 1
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = 1
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=6]
 
-[sub_resource type="Environment" id=10]
+[sub_resource type="Environment" id=7]
 background_mode = 4
 tonemap_mode = 2
 glow_blend_mode = 0
@@ -41,21 +42,35 @@ adjustment_brightness = 0.79
 adjustment_contrast = 1.27
 adjustment_saturation = 1.53
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=8]
 size = 18
 font_data = ExtResource( 6 )
 
-[sub_resource type="Theme" id=14]
-default_font = SubResource( 13 )
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="Animation" id=10]
+resource_name = "settings_tab_close"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 1 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=12]
 size = 24
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=13]
 size = 48
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -149,7 +164,7 @@ margin_left = -86.5
 margin_top = -90.0
 margin_right = 86.5
 margin_bottom = -22.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 5 )
 text = "Play"
 flat = true
 __meta__ = {
@@ -165,8 +180,8 @@ margin_left = -86.5
 margin_top = -9.0
 margin_right = 86.5
 margin_bottom = 59.0
-custom_styles/normal = SubResource( 8 )
-custom_fonts/font = SubResource( 9 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Editor"
 flat = true
 __meta__ = {
@@ -182,7 +197,7 @@ margin_left = -86.5
 margin_top = 70.0
 margin_right = 86.5
 margin_bottom = 138.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 5 )
 text = "Settings"
 flat = true
 __meta__ = {
@@ -198,7 +213,7 @@ margin_left = 400.369
 margin_top = 247.264
 margin_right = 573.369
 margin_bottom = 315.264
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 5 )
 text = "Exit"
 flat = true
 __meta__ = {
@@ -206,23 +221,27 @@ __meta__ = {
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 10 )
+environment = SubResource( 7 )
 
 [node name="settings" type="CanvasLayer" parent="."]
 
 [node name="settings" type="Control" parent="settings"]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -842.0
-theme = SubResource( 14 )
+theme = SubResource( 9 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="settings/settings"]
+anims/settings_tab = ExtResource( 9 )
+anims/settings_tab_close = SubResource( 10 )
+
 [node name="Panel" type="Panel" parent="settings/settings"]
-modulate = Color( 0, 0, 0, 0.392157 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -270,7 +289,7 @@ margin_left = 65.0
 margin_right = 365.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 300, 0 )
-custom_styles/normal = SubResource( 15 )
+custom_styles/normal = SubResource( 11 )
 placeholder_text = "Player Name"
 placeholder_alpha = 0.195
 
@@ -328,7 +347,7 @@ anchor_right = 0.5
 margin_left = -219.0
 margin_right = 219.0
 margin_bottom = 34.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 text = "Personalize your settings"
 align = 1
 __meta__ = {
@@ -344,7 +363,7 @@ margin_left = -196.0
 margin_top = -99.0
 margin_right = -36.0
 margin_bottom = -26.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "Cancel"
 flat = true
 
@@ -357,7 +376,7 @@ margin_left = 72.0
 margin_top = -99.0
 margin_right = 188.0
 margin_bottom = -26.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "Save"
 flat = true
 [connection signal="pressed" from="Menu_btns/Play_btn" to="." method="_on_Play_btn_pressed"]
