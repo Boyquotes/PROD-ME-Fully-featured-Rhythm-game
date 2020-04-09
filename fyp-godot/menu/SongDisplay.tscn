@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/SongDisplay.gd" type="Script" id=2]
+[ext_resource path="res://skin/menu-button-background@2x.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 18
+size = 20
 font_data = ExtResource( 1 )
 
 [node name="SongDisplay" type="Control"]
@@ -12,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
 margin_top = 1.0
-margin_right = -879.0
+margin_right = -779.0
 margin_bottom = -619.0
 script = ExtResource( 2 )
 __meta__ = {
@@ -20,42 +21,59 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="."]
-modulate = Color( 0.2, 0.2, 0.2, 0.784314 )
-margin_right = 398.0
-margin_bottom = 96.0
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 23.0
+margin_right = 652.0
+margin_bottom = 97.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="details" type="VBoxContainer" parent="."]
-margin_left = 6.0
-margin_right = 398.0
-margin_bottom = 97.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 34.0
+margin_top = -7.0
+margin_right = 34.0
+margin_bottom = -15.0
 mouse_filter = 2
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SongName" type="Label" parent="details"]
-margin_right = 392.0
-margin_bottom = 26.0
+margin_right = 500.0
+margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 text = "Song Name that may or may not be very long"
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Artist" type="Label" parent="details"]
-margin_top = 30.0
-margin_right = 392.0
-margin_bottom = 56.0
+margin_top = 32.0
+margin_right = 500.0
+margin_bottom = 60.0
 custom_fonts/font = SubResource( 1 )
 text = "Artist Name that may or may not be very long"
 autowrap = true
 
 [node name="Creator" type="Label" parent="details"]
-margin_top = 60.0
-margin_right = 392.0
-margin_bottom = 86.0
+margin_top = 64.0
+margin_right = 500.0
+margin_bottom = 92.0
 custom_fonts/font = SubResource( 1 )
 text = "Map Creator"
 autowrap = true
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.901961, 0.756863, 0.65098, 1 )
+show_behind_parent = true
+position = Vector2( 366.476, 46.6333 )
+scale = Vector2( 0.480461, 0.504815 )
+texture = ExtResource( 3 )
+[connection signal="focus_entered" from="Button" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_exited" from="Button" to="." method="_on_Button_focus_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

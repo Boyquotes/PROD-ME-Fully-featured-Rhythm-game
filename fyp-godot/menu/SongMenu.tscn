@@ -1,10 +1,18 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/SongMenu.gd" type="Script" id=2]
 [ext_resource path="res://addons/gamejolt_api_v2/main.gd" type="Script" id=3]
 [ext_resource path="res://menu/bg_loop.gd" type="Script" id=4]
 [ext_resource path="res://menu/bg.webm" type="VideoStream" id=5]
+[ext_resource path="res://skin/selection-mode@2x.png" type="Texture" id=6]
+[ext_resource path="res://skin/menu-back@2x.png" type="Texture" id=7]
+[ext_resource path="res://visualiser_round.gd" type="Script" id=8]
+[ext_resource path="res://menu/MainMenu.shader" type="Shader" id=9]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 9 )
+shader_param/blurSize = 20
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -21,6 +29,12 @@ adjustment_enabled = true
 adjustment_brightness = 0.89
 adjustment_contrast = 1.18
 adjustment_saturation = 1.29
+
+[sub_resource type="DynamicFont" id=4]
+size = 38
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
 
 [node name="SongMenu" type="Control"]
 anchor_right = 1.0
@@ -47,15 +61,43 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="fx" type="ColorRect" parent="VideoCont"]
+material = SubResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="GameJoltAPI" type="HTTPRequest" parent="."]
 script = ExtResource( 3 )
 private_key = "698ecd33e7b68a3c749016ce1770c95d"
 game_id = "483664"
 
+[node name="Visualizer" type="Node2D" parent="."]
+position = Vector2( 565.529, 354.988 )
+script = ExtResource( 8 )
+definition = 200
+is_circle = true
+cycle_colors = true
+line_thickness = 2
+
+[node name="Visualizer2" type="Node2D" parent="."]
+position = Vector2( 565.529, 354.988 )
+script = ExtResource( 8 )
+length = 100
+definition = 200
+is_circle = true
+cycle_colors = true
+line_thickness = 2
+is_inverted = true
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -420.0
+margin_top = 118.0
 margin_bottom = 720.0
 scroll_horizontal_enabled = false
 __meta__ = {
@@ -63,6 +105,15 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -24.0
+margin_right = 1299.0
+margin_bottom = 54.0
+color = Color( 0, 0, 0, 0.392157 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,7 +133,7 @@ __meta__ = {
 [node name="ScoreCont" type="ScrollContainer" parent="."]
 anchor_bottom = 1.0
 margin_left = 7.0
-margin_top = 46.0
+margin_top = 66.0
 margin_right = 412.0
 margin_bottom = -84.0
 scroll_horizontal_enabled = false
@@ -95,20 +146,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 539.708, 678.14 )
+scale = Vector2( 0.533065, 0.533065 )
+texture = ExtResource( 6 )
+
 [node name="ButtonCont" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -94.0
-margin_right = 153.0
+margin_left = -4.0
+margin_top = -93.0
+margin_right = 232.0
+margin_bottom = 3.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="back_btn" type="Button" parent="ButtonCont"]
-margin_right = 153.0
-margin_bottom = 94.0
+margin_right = 236.0
+margin_bottom = 96.0
 custom_fonts/font = SubResource( 2 )
-text = "Back"
+icon = ExtResource( 7 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -118,5 +176,17 @@ __meta__ = {
 environment = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Player" type="Label" parent="."]
+margin_left = 577.0
+margin_top = 648.0
+margin_right = 855.0
+margin_bottom = 767.0
+custom_fonts/font = SubResource( 4 )
+text = "PLayerName
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="api_scores_fetched" from="GameJoltAPI" to="." method="_on_GameJoltAPI_api_scores_fetched"]
 [connection signal="pressed" from="ButtonCont/back_btn" to="." method="_on_back_btn_pressed"]

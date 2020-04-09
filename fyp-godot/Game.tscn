@@ -63,9 +63,9 @@ cycle_colors = true
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 
 [node name="LoadingScreen" parent="OverlayLayer" instance=ExtResource( 7 )]
-visible = false
 
 [node name="Pause_menu" parent="OverlayLayer" instance=ExtResource( 6 )]
+visible = true
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, -147.088, -309.249 )

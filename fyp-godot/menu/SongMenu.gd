@@ -18,6 +18,7 @@ func _ready():
 	parse_song_files()
 	add_list()
 	fetch_api()
+	$Player.text = SETTINGS._settings.player.player_name
 	
 func play_song(path):
 	var ogg_file = File.new()

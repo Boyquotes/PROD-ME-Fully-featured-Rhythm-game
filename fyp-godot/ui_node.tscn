@@ -5,14 +5,13 @@
 [ext_resource path="res://accuracy_cont.gd" type="Script" id=3]
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "combo_anim"
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("combo:custom_fonts/font:size")
@@ -86,7 +85,7 @@ margin_left = 511.384
 margin_top = 403.0
 margin_right = 770.384
 margin_bottom = 720.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "0000"
 align = 1
 valign = 1
@@ -126,4 +125,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/combo_anim = SubResource( 1 )
+anims/combo_anim = SubResource( 2 )
