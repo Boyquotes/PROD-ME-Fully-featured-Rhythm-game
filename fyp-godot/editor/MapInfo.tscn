@@ -51,29 +51,22 @@ margin_bottom = 129.0
 text = "
 Artist"
 
-[node name="RequiredNotice" type="Label" parent="VBoxContainer"]
+[node name="Artist_input" type="LineEdit" parent="VBoxContainer"]
 margin_top = 133.0
 margin_right = 369.0
-margin_bottom = 147.0
-custom_colors/font_color = Color( 0.141176, 0.964706, 0.113725, 1 )
-text = "required"
-
-[node name="Artist_input" type="LineEdit" parent="VBoxContainer"]
-margin_top = 151.0
-margin_right = 369.0
-margin_bottom = 175.0
+margin_bottom = 157.0
 caret_blink = true
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-margin_top = 179.0
+margin_top = 161.0
 margin_right = 369.0
-margin_bottom = 210.0
+margin_bottom = 192.0
 text = "
 Title"
 
 [node name="Title_input" type="LineEdit" parent="VBoxContainer"]
-margin_top = 214.0
+margin_top = 196.0
 margin_right = 369.0
-margin_bottom = 238.0
+margin_bottom = 220.0
 caret_blink = true
 [connection signal="confirmed" from="." to="." method="_on_MapInfo_confirmed"]

@@ -82,7 +82,6 @@ onready  var tracks_c = get_node("ScrollContainer/VBoxContainer/TracksCont")
 
 var editor_scn_path = "res://editor/editor.tscn"
 
-#Setting up ready initialization on startup
 func _ready():
 	load_editor()
 	
@@ -150,7 +149,6 @@ func _process(delta):
 func update_last_file_path(file_path):
 	EDITOR_C.last_file_path = file_path
 	
-#Setting up directories to be used by editor
 func setup_editor_dir():
 	print("user data dir:", OS.get_user_data_dir())
 	editor_dir = "user://editor"
@@ -161,7 +159,6 @@ func setup_editor_dir():
 
 	print("editor_dir:", editor_dir)
 	
-#setting any paramaters weather initial or dynamic
 func set_params():
 	sample_duration_in_sec = stream.get_length()
 	quarter_time_in_sec = 60.0 / track_tempo
@@ -193,7 +190,6 @@ func set_params():
 func load_waveform():
 	waveform_n.set_stream(stream)
 	
-
 func play():
 	if is_playing:
 		is_playing = false
@@ -325,7 +321,6 @@ func _on_import_btn_pressed():
 func _on_loadAudio_file_selected(path):
 	audio_load_thread.start(self, "load_audio", path)
 
-#Checking if the file exists
 func check_audio():
 	var checker = File.new()
 	
@@ -334,7 +329,6 @@ func check_audio():
 		return false
 	return true
 
-#checking if the audio data is loaded
 func is_audio_loaded(audio_data):
 	if audio_data == null:
 		show_notice("error")
@@ -343,7 +337,6 @@ func is_audio_loaded(audio_data):
 	else :
 		return true
 
-#loading the ogg audio
 func load_ogg(path):
 	var ogg_file = File.new()
 	ogg_file.open(path, File.READ)
@@ -352,8 +345,7 @@ func load_ogg(path):
 	stream.data = bytes
 	ogg_file.close()
 	return stream
-
-#loading the selected file
+	
 func load_audio(input_file_path):
 	print("loading started ", input_file_path)
 	enable_load_audio(false)
@@ -388,8 +380,6 @@ func load_audio(input_file_path):
 	update_last_file_path(input_file_path)
 	update_load_audio(tr("Audio Loaded"))
 	audio_load_thread.wait_to_finish()
-	if audio_load_thread.is_active():
-		print("THREAD ACTIVE")
 	
 func update_controls():
 	if audio_loaded:
@@ -479,13 +469,11 @@ func _on_MapInfo_map_info_saved():
 	map_info_was_saved = true
 	export_data()
 
-
 func _on_save_btn_pressed():
 	if not map_info_was_saved:
 		map_info_dialog.popup_centered()
 		pending_export = true
 
-#Copying out audio file into a folder for backup purposes
 func copy_audio(input_file_path):
 	print("copy started")
 	var file_name = input_file_path.get_file()
@@ -558,11 +546,9 @@ func export_data():
 	print("copy finished")
 	print("data exported")
 	
-
 func get_curr_date():
 	var today = OS.get_date()
 	return ("%s-%02d-%02d" % [today.year, today.month, today.day])
-
 
 func _on_load_btn_pressed():
 	import_map_dialog.set_current_path(EDITOR_C.last_file_path)
@@ -633,14 +619,11 @@ func clear_tracks():
 		print("track ", tracks[0] ," removed")
 		destroy_track(tracks[0])
 
-
 func _on_MapInfo_about_to_show():
 	popup_active = true
 
-
 func _on_MapInfo_popup_hide():
 	popup_active = false
-
 
 func _on_Exit_btn_pressed():
 	get_tree().change_scene("res://menu/MainMenu.tscn")

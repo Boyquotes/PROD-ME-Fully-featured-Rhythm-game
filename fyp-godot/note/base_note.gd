@@ -6,7 +6,6 @@ var position = 0
 var length
 var length_scale
 var speed
-var score = 0
 var accuracy
 var multiplier = 1
 var note_color

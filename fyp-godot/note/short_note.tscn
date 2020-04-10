@@ -13,7 +13,7 @@ depth_deep_parallax = false
 depth_flip_tangent = false
 depth_flip_binormal = false
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 5.40338, 0.1, 5.9624 )
 
 [node name="short_note" type="Spatial"]
@@ -32,7 +32,7 @@ transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.025, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0325817, 0.0509913, 0.0778672 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.877258, 0.435473, 0.501548 )

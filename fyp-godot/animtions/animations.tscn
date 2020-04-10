@@ -23,10 +23,10 @@
 [ext_resource path="res://animtions/lightingL-11.png" type="Texture" id=21]
 [ext_resource path="res://animtions/lightingL-10.png" type="Texture" id=22]
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=1]
 params_blend_mode = 1
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": false,
@@ -34,10 +34,10 @@ animations = [ {
 "speed": 60.0
 } ]
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=3]
 params_blend_mode = 1
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 12 ), ExtResource( 17 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 21 ) ],
 "loop": true,
@@ -49,11 +49,11 @@ animations = [ {
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
 
 [node name="short_hit" type="AnimatedSprite3D" parent="."]
-material_override = SubResource( 6 )
-frames = SubResource( 7 )
+material_override = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "short_hit"
 
 [node name="long_hit_hold" type="AnimatedSprite3D" parent="."]
-material_override = SubResource( 8 )
-frames = SubResource( 9 )
+material_override = SubResource( 3 )
+frames = SubResource( 4 )
 animation = "long_hit_hold"

@@ -186,7 +186,6 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="song_select_btn"]
 position = Vector2( 119.162, 0.773743 )
 frames = SubResource( 3 )
-frame = 2
 playing = true
 
 [node name="try_again_btn" type="Button" parent="."]

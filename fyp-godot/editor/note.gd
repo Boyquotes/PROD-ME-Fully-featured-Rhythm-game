@@ -79,7 +79,6 @@ func delete():
 func update_scale(val):
 	updated_scale = val
 
-
 func _on_Control_gui_input(e):
 	if editor and editor.grab_cursor_slider_focus(e):
 		return 

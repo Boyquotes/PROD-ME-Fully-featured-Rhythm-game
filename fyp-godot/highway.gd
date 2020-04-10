@@ -61,7 +61,6 @@ func get_bar_data():
 	#print(line4_data)
 	return [line1_data, line2_data, line3_data, line4_data]
 	
-	
 func remove_bar(bar):
 	#print("REMOVING BAR")
 	bar.queue_free()

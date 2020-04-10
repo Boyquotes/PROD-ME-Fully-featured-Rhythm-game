@@ -7,7 +7,7 @@
 [ext_resource path="res://ui_node.tscn" type="PackedScene" id=5]
 [ext_resource path="res://menu/Pause_menu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://menu/LoadingScreen.tscn" type="PackedScene" id=7]
-[ext_resource path="res://game/don_t_forget_me_by_yuumei-d5tgubp.jpg" type="Texture" id=8]
+[ext_resource path="res://game/anime-scenery-sunset-anime-school-girl-clouds-artwork-anime-34390.jpeg" type="Texture" id=8]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 25, 1, 1 )
@@ -70,7 +70,7 @@ visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, -147.088, -309.249 )
-pixel_size = 0.8
+pixel_size = 0.45
 texture = ExtResource( 8 )
 
 [node name="OmniLight" type="OmniLight" parent="."]

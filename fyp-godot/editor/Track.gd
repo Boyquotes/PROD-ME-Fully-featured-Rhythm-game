@@ -31,7 +31,6 @@ func _process(_delta):
 		update_start_position()
 		start_pos_updated = true
 
-# warning-ignore:shadowed_variable
 func setup(bars_count, update_existing = false):
 	self.bars_count = bars_count
 	if update_existing:respawn_bars()
@@ -39,7 +38,6 @@ func setup(bars_count, update_existing = false):
 func spawn_bars():
 	clear_bars()
 	var x = 0
-	
 	if bars_data != null:
 		for data in bars_data:
 			var bar = add_bar(x, int(data.index), int(data.quarters_count))
@@ -98,7 +96,6 @@ func add_bar(x, index, quarters_count):
 	bars_c.call_deferred("add_child", bar)
 	return bar
 
-
 func get_data():
 # warning-ignore:shadowed_variable
 	var bars_data = []
@@ -133,17 +130,9 @@ func get_max_bar_height():
 	var max_h = 0
 	for b in bars:
 		var h = b.get_height()
-		if h > max_h:max_h = h
+		if h > max_h:
+			max_h = h
 	return max_h
-
-
-func _on_name_control_gui_input(e):
-	if editor and editor.grab_cursor_slider_focus(e):
-		return 
-	if (e is InputEventMouseButton and e.button_index == BUTTON_LEFT and e.pressed) or (e is InputEventScreenTouch):
-		if is_active:editor.unset_active_track()
-		else :editor.set_active_track(self)
-		print("HANDLED!")
 
 func set_active(val):
 	is_active = val

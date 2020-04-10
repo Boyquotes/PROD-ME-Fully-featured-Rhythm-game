@@ -13,14 +13,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameCont" type="Control" parent="."]
-margin_top = -18.0
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="BarsCont" type="Control" parent="."]
 margin_top = 13.0
 margin_right = 40.0

@@ -36,7 +36,8 @@ func update_scale(val):
 	set_scale(Vector2(val, 1))
 	set_position(Vector2(x_pos * val, get_position().y))
 	index_label.set_scale(Vector2(1.0 / val, 1))
-	for n in notes:n.update_scale(val)
+	for n in notes:
+		n.update_scale(val)
 
 func add_note(x):
 	filled_cells.append(int(x))
@@ -47,7 +48,6 @@ func add_note(x):
 	sort_notes()
 	update_notes_width()
 	return n
-
 
 func clear_notes():
 	for n in notes:
