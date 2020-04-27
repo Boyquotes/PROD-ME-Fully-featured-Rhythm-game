@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dffdfdf-hehehe.ogg-7b6499dcd06f2edd26c764257e6004c8.oggstr"
+
+[deps]
+
+source_file="res://songs/2427563259 dffdfdf-hehehe/dffdfdf-hehehe.ogg"
+dest_files=[ "res://.import/dffdfdf-hehehe.ogg-7b6499dcd06f2edd26c764257e6004c8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

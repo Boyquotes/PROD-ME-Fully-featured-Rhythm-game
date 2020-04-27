@@ -401,6 +401,6 @@ bus = "ui"
 [connection signal="mouse_entered" from="Menu_btns/Exit_btn" to="." method="_on_Exit_btn_mouse_entered"]
 [connection signal="mouse_exited" from="Menu_btns/Exit_btn" to="." method="_on_Exit_btn_mouse_exited"]
 [connection signal="pressed" from="Menu_btns/Exit_btn" to="." method="_on_Exit_btn_pressed"]
-[connection signal="pressed" from="settings/settings/cancel_btn" to="settings/settings" method="_on_cancel_btn_pressed"]
 [connection signal="pressed" from="settings/settings/cancel_btn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="settings/settings/cancel_btn" to="settings/settings" method="_on_cancel_btn_pressed"]
 [connection signal="pressed" from="settings/settings/save_btn" to="settings/settings" method="_on_save_btn_pressed"]
