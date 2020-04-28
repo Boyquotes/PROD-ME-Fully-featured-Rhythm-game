@@ -10,7 +10,7 @@ var note_hit
 
 func _ready():
 	set_process_input(true)
-	$".".set_scale(gate_scale)
+	$"NoteGateCont".set_scale(gate_scale)
 	mesh.hide()
 	
 func _input(event):

@@ -12,20 +12,24 @@ func _on_ready():
 	._on_ready()
 	note_len = length*length_scale
 	$note_beam.scale = Vector3(1,1,note_len)
-			
+
+func _exit_tree():
+	if hold_end or hold_started:
+		hold_anims(false)
+		
 func _on_process(delta):
 	if is_colliding and not hold_end:
 		if gate.is_hitting and not is_hit:
 			hit()
 			hold_started = true
 			gate.note_hit = self
-		elif !gate.is_hitting and hold_started and is_hit or hold_end:
+		elif !gate.is_hitting and hold_started and is_hit:
 			hold_end = true
 			gate.note_hit = null
 			gate.is_hitting = false
 			$note_beam.get_node("MeshInstance").hide()
 			hold_anims(false)
-
+			
 	if hold_started and not hold_end:
 		note_len -= speed.z * delta
 		note_hitting = true
@@ -39,8 +43,6 @@ func _on_process(delta):
 		else:
 			print("anim stop", gate)
 			note_hitting = false
-			
-		if note_hitting == false:
 			hold_anims(false)
 		
 func hold_anims(play):
@@ -54,8 +56,7 @@ func hold_anims(play):
 func contHit():
 	ui.hit_continued_feedback(accuracy)
 	
-		
-func hit():
+func hit(_is_miss = false):
 	$MeshInstance.hide()
 	is_hit = true
 	ui.hit_feedback(accuracy)

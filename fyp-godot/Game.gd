@@ -33,9 +33,7 @@ func load_game():
 	setup_nodes()
 	
 func set_vars():
-	audio_file = GAME_C.map_selected.audio_file
 	map_file = GAME_C.map_selected.map_file
-	audio = load(audio_file)
 	map = load_map()
 	load_percent += 25
 	loading_screen.update_percent(load_percent)

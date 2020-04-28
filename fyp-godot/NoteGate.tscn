@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://NoteGate.gd" type="Script" id=1]
 [ext_resource path="res://animtions/lightingN-5.png" type="Texture" id=2]
@@ -96,7 +96,12 @@ tracks/1/keys = {
 }
 
 [sub_resource type="BoxShape" id=10]
-extents = Vector3( 1, 0.2, 0.0209353 )
+extents = Vector3( 1, 0.2, 0.2 )
+
+[sub_resource type="CubeMesh" id=11]
+size = Vector3( 1.2, 0.01, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=12]
 
 [node name="NoteGate" type="Spatial"]
 transform = Transform( 9, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
@@ -129,48 +134,50 @@ animation = "long_hit_hold"
 autoplay = "short_hit"
 anims/short_hit = SubResource( 9 )
 
-[node name="PerfectArea" type="Area" parent="." groups=[
+[node name="NoteGateCont" type="Spatial" parent="."]
+
+[node name="PerfectArea" type="Area" parent="NoteGateCont" groups=[
 "gate_perfect",
 ]]
-transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -0.104603 )
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -0.0616057 )
 
-[node name="ColPerfect" type="CollisionShape" parent="PerfectArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
+[node name="ColPerfect" type="CollisionShape" parent="NoteGateCont/PerfectArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.8, 0, 0, 0 )
 shape = SubResource( 10 )
 
-[node name="GreatArea" type="Area" parent="." groups=[
+[node name="GreatArea" type="Area" parent="NoteGateCont" groups=[
 "gate_great",
 ]]
-transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 1.087 )
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 1.13041 )
 
-[node name="CollGreatLate" type="CollisionShape" parent="GreatArea"]
+[node name="CollGreatLate" type="CollisionShape" parent="NoteGateCont/GreatArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8 )
 shape = SubResource( 10 )
 
-[node name="ColGreatEarly" type="CollisionShape" parent="GreatArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.71932 )
+[node name="ColGreatEarly" type="CollisionShape" parent="NoteGateCont/GreatArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.01814 )
 shape = SubResource( 10 )
 
-[node name="OkArea" type="Area" parent="." groups=[
+[node name="OkArea" type="Area" parent="NoteGateCont" groups=[
 "gate_ok",
 ]]
-transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0 )
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -0.00152124 )
 
-[node name="CollOkLate" type="CollisionShape" parent="OkArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0.7 )
+[node name="CollOkLate" type="CollisionShape" parent="NoteGateCont/OkArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0.8 )
 shape = SubResource( 10 )
 
-[node name="ColOkEarly" type="CollisionShape" parent="OkArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -0.847111 )
+[node name="ColOkEarly" type="CollisionShape" parent="NoteGateCont/OkArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -1.08927 )
 shape = SubResource( 10 )
 
-[node name="CollMiss" type="Area" parent="." groups=[
+[node name="CollMiss" type="Area" parent="NoteGateCont" groups=[
 "gate_miss_late",
 ]]
-transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -0.788 )
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -0.836984 )
 
-[node name="ColMiss" type="CollisionShape" parent="CollMiss"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3.5, 0, 0, 2.64985 )
+[node name="ColMiss" type="CollisionShape" parent="NoteGateCont/CollMiss"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3.5, 0, 0, 3.44802 )
 shape = SubResource( 10 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
@@ -181,3 +188,7 @@ visible = false
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.71041, -0.251785 )
 visible = false
 omni_range = 81.5
+
+[node name="Safety" type="MeshInstance" parent="."]
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )

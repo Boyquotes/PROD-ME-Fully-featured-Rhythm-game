@@ -379,7 +379,7 @@ func load_audio(input_file_path):
 	
 	update_last_file_path(input_file_path)
 	update_load_audio(tr("Audio Loaded"))
-	audio_load_thread.wait_to_finish()
+	audio_load_thread.free()
 	
 func update_controls():
 	if audio_loaded:
@@ -626,6 +626,7 @@ func _on_MapInfo_popup_hide():
 	popup_active = false
 
 func _on_Exit_btn_pressed():
+#	audio_load_thread.wait_to_finish()
 	get_tree().change_scene("res://menu/MainMenu.tscn")
 
 func _on_reset_btn_pressed():

@@ -10,7 +10,7 @@
 [ext_resource path="res://game/anime-scenery-sunset-anime-school-girl-clouds-artwork-anime-34390.jpeg" type="Texture" id=8]
 
 [sub_resource type="CubeMesh" id=1]
-size = Vector3( 25, 1, 1 )
+size = Vector3( 25, 0.1, 1 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
@@ -34,6 +34,7 @@ script = ExtResource( 1 )
 
 [node name="SafetyLine" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10447, -0.100277 )
+visible = false
 mesh = SubResource( 1 )
 material/0 = null
 
@@ -47,8 +48,11 @@ fov = 100.0
 far = 8192.0
 
 [node name="DebugCam" type="Camera" parent="."]
-transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 47.6535, 4.82814 )
-fov = 120.0
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 47.6535, -8.39546 )
+projection = 1
+fov = 31.0
+size = 251.57
+far = 184.3
 
 [node name="music" parent="." instance=ExtResource( 4 )]
 

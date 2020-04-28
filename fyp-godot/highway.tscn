@@ -64,19 +64,19 @@ skeleton = NodePath("")
 material/0 = SubResource( 6 )
 
 [node name="NoteGate" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, -0.2 )
 line = 1
 
 [node name="NoteGate2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.525, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.525, 0, -0.2 )
 line = 2
 
 [node name="NoteGate3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.525, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.525, 0, -0.2 )
 line = 3
 
 [node name="NoteGate4" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, -0.2 )
 line = 4
 
 [node name="BarsNode" type="Spatial" parent="."]

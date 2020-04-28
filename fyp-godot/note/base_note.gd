@@ -29,13 +29,14 @@ func _on_ready():
 	set_position()
 	add_listeners()
 	
-func hit():
+func hit(is_miss = false):
 	$MeshInstance.hide()
 	is_hit = true
 	gate.is_hitting = false
 	if accuracy != 4:
 		gate.play_anim()
-	gate.note_hit = self
+	if not is_miss:
+		gate.note_hit = self
 	ui.hit_feedback(accuracy)
 	ui.add_score()
 
@@ -73,21 +74,17 @@ func _on_area_entered(area):
 	if area.is_in_group("gate_perfect"):
 		accuracy = 1
 		is_colliding = true
-		gate = area.get_parent()
+		gate = area.get_parent().get_parent()
 	elif area.is_in_group("gate_great"):
 		accuracy = 2
 		is_colliding = true
-		gate = area.get_parent()
+		gate = area.get_parent().get_parent()
 	elif area.is_in_group("gate_ok"):
 		accuracy = 3
 		is_colliding = true
-		gate = area.get_parent()
-	elif area.is_in_group("gate_miss"):
-		accuracy = 4
-		is_colliding = true
-		gate = area.get_parent()
+		gate = area.get_parent().get_parent()
 	elif area.is_in_group("gate_miss_late"):
 		accuracy = 4
-		#is_colliding = false
-		gate = area.get_parent()
-		hit()
+		is_colliding = false
+		gate = area.get_parent().get_parent()
+		hit(true)
