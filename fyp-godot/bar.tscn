@@ -4,8 +4,7 @@
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_transparent = true
-vertex_color_use_as_albedo = true
-albedo_color = Color( 1, 1, 1, 0.235294 )
+albedo_color = Color( 1, 1, 1, 0.117647 )
 
 [sub_resource type="PlaneMesh" id=2]
 material = SubResource( 1 )
@@ -16,6 +15,6 @@ transform = Transform( 1.1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 0.075, 0, 0.02, 0.1 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, -0.1, 0 )
 mesh = SubResource( 2 )
 material/0 = null

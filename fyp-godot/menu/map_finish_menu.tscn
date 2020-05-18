@@ -1,24 +1,76 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=75 format=2]
 
-[ext_resource path="res://skin/ranking-panel@2x.png" type="Texture" id=1]
+[ext_resource path="res://skin/skin new/menu-back-45.png" type="Texture" id=1]
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://menu/map_finish_menu.gd" type="Script" id=3]
 [ext_resource path="res://addons/gamejolt_api_v2/main.gd" type="Script" id=4]
-[ext_resource path="res://animtions/menu-back-3.png" type="Texture" id=5]
+[ext_resource path="res://skin/skin new/menu-back-46.png" type="Texture" id=5]
 [ext_resource path="res://skin/pause-retry@2x.png" type="Texture" id=6]
 [ext_resource path="res://animtions/hit50.png" type="Texture" id=7]
 [ext_resource path="res://animtions/hit300.png" type="Texture" id=8]
 [ext_resource path="res://animtions/hit0.png" type="Texture" id=9]
 [ext_resource path="res://animtions/hit100.png" type="Texture" id=10]
-[ext_resource path="res://animtions/menu-back-2.png" type="Texture" id=11]
-[ext_resource path="res://animtions/menu-back-5.png" type="Texture" id=12]
-[ext_resource path="res://animtions/menu-back-1.png" type="Texture" id=13]
-[ext_resource path="res://animtions/menu-back-4.png" type="Texture" id=14]
-[ext_resource path="res://animtions/menu-back-0.png" type="Texture" id=15]
-[ext_resource path="res://animtions/menu-back-6.png" type="Texture" id=16]
+[ext_resource path="res://skin/skin new/menu-back-0.png" type="Texture" id=11]
+[ext_resource path="res://skin/skin new/menu-back-15.png" type="Texture" id=12]
+[ext_resource path="res://skin/skin new/menu-back-11.png" type="Texture" id=13]
+[ext_resource path="res://skin/skin new/menu-back-16.png" type="Texture" id=14]
+[ext_resource path="res://skin/skin new/menu-back-22.png" type="Texture" id=15]
+[ext_resource path="res://skin/skin new/menu-back-21.png" type="Texture" id=16]
 [ext_resource path="res://skin/menuclick.wav" type="AudioStream" id=17]
 [ext_resource path="res://skin/menuback.wav" type="AudioStream" id=18]
 [ext_resource path="res://skin/Applause.wav" type="AudioStream" id=19]
+[ext_resource path="res://skin/skin new/menu-back-8.png" type="Texture" id=20]
+[ext_resource path="res://skin/skin new/menu-back-23.png" type="Texture" id=21]
+[ext_resource path="res://skin/skin new/menu-back-26.png" type="Texture" id=22]
+[ext_resource path="res://skin/skin new/menu-back-27.png" type="Texture" id=23]
+[ext_resource path="res://skin/skin new/menu-back-28.png" type="Texture" id=24]
+[ext_resource path="res://skin/skin new/menu-back-12.png" type="Texture" id=25]
+[ext_resource path="res://skin/skin new/menu-back-29.png" type="Texture" id=26]
+[ext_resource path="res://skin/skin new/menu-back-31.png" type="Texture" id=27]
+[ext_resource path="res://skin/skin new/menu-back-14.png" type="Texture" id=28]
+[ext_resource path="res://skin/skin new/menu-back-18.png" type="Texture" id=29]
+[ext_resource path="res://skin/skin new/menu-back-30.png" type="Texture" id=30]
+[ext_resource path="res://skin/skin new/menu-back-1.png" type="Texture" id=31]
+[ext_resource path="res://skin/skin new/menu-back-2.png" type="Texture" id=32]
+[ext_resource path="res://skin/skin new/menu-back-5.png" type="Texture" id=33]
+[ext_resource path="res://skin/skin new/menu-back-4.png" type="Texture" id=34]
+[ext_resource path="res://skin/skin new/menu-back-9.png" type="Texture" id=35]
+[ext_resource path="res://skin/skin new/menu-back-13.png" type="Texture" id=36]
+[ext_resource path="res://skin/skin new/menu-back-19.png" type="Texture" id=37]
+[ext_resource path="res://skin/skin new/menu-back-17.png" type="Texture" id=38]
+[ext_resource path="res://skin/skin new/menu-back-7.png" type="Texture" id=39]
+[ext_resource path="res://skin/skin new/menu-back-20.png" type="Texture" id=40]
+[ext_resource path="res://skin/skin new/menu-back-10.png" type="Texture" id=41]
+[ext_resource path="res://skin/skin new/menu-back-24.png" type="Texture" id=42]
+[ext_resource path="res://skin/skin new/menu-back-25.png" type="Texture" id=43]
+[ext_resource path="res://skin/skin new/menu-back-6.png" type="Texture" id=44]
+[ext_resource path="res://skin/skin new/menu-back-3.png" type="Texture" id=45]
+[ext_resource path="res://skin/skin new/menu-back-43.png" type="Texture" id=46]
+[ext_resource path="res://skin/skin new/menu-back-44.png" type="Texture" id=47]
+[ext_resource path="res://skin/skin new/menu-back-32.png" type="Texture" id=48]
+[ext_resource path="res://skin/skin new/menu-back-41.png" type="Texture" id=49]
+[ext_resource path="res://skin/skin new/menu-back-34.png" type="Texture" id=50]
+[ext_resource path="res://skin/skin new/menu-back-38.png" type="Texture" id=51]
+[ext_resource path="res://skin/skin new/menu-back-39.png" type="Texture" id=52]
+[ext_resource path="res://skin/skin new/menu-back-37.png" type="Texture" id=53]
+[ext_resource path="res://skin/skin new/menu-back-36.png" type="Texture" id=54]
+[ext_resource path="res://skin/skin new/menu-back-33.png" type="Texture" id=55]
+[ext_resource path="res://skin/skin new/menu-back-35.png" type="Texture" id=56]
+[ext_resource path="res://skin/skin new/menu-back-42.png" type="Texture" id=57]
+[ext_resource path="res://skin/skin new/menu-back-40.png" type="Texture" id=58]
+[ext_resource path="res://skin/skin new/menu-back-55.png" type="Texture" id=59]
+[ext_resource path="res://skin/skin new/menu-back-56.png" type="Texture" id=60]
+[ext_resource path="res://skin/skin new/menu-back-57.png" type="Texture" id=61]
+[ext_resource path="res://skin/skin new/menu-back-50.png" type="Texture" id=62]
+[ext_resource path="res://skin/skin new/menu-back-53.png" type="Texture" id=63]
+[ext_resource path="res://skin/skin new/menu-back-51.png" type="Texture" id=64]
+[ext_resource path="res://skin/skin new/menu-back-52.png" type="Texture" id=65]
+[ext_resource path="res://skin/skin new/menu-back-58.png" type="Texture" id=66]
+[ext_resource path="res://skin/skin new/menu-back-54.png" type="Texture" id=67]
+[ext_resource path="res://skin/skin new/menu-back-49.png" type="Texture" id=68]
+[ext_resource path="res://skin/skin new/menu-back-48.png" type="Texture" id=69]
+[ext_resource path="res://skin/skin new/menu-back-47.png" type="Texture" id=70]
+[ext_resource path="res://skin/skin new/ranking-panel@2x.png" type="Texture" id=71]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -30,15 +82,17 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 45 ), ExtResource( 34 ), ExtResource( 33 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 20 ), ExtResource( 35 ), ExtResource( 41 ), ExtResource( 13 ), ExtResource( 25 ), ExtResource( 36 ), ExtResource( 28 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 38 ), ExtResource( 29 ), ExtResource( 37 ), ExtResource( 40 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 21 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 30 ), ExtResource( 27 ), ExtResource( 48 ), ExtResource( 55 ), ExtResource( 50 ), ExtResource( 56 ), ExtResource( 54 ), ExtResource( 53 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 58 ), ExtResource( 49 ), ExtResource( 57 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 70 ), ExtResource( 69 ), ExtResource( 68 ), ExtResource( 62 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 63 ), ExtResource( 67 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 66 ) ],
 "loop": true,
 "name": "default",
-"speed": 10.0
+"speed": 24.0
 } ]
 
 [node name="map_finish_menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -3.0
+margin_right = -3.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,9 +104,9 @@ private_key = "698ecd33e7b68a3c749016ce1770c95d"
 game_id = "483664"
 
 [node name="score_screen" type="Sprite" parent="."]
-position = Vector2( 641.081, 424.206 )
-scale = Vector2( 0.451264, 0.451264 )
-texture = ExtResource( 1 )
+position = Vector2( 513.191, 507.663 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 71 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1283.0
@@ -62,11 +116,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 29.0
+margin_top = 262.0
+margin_right = 115.0
+margin_bottom = 309.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+margin_left = 337.738
+margin_top = 263.47
+margin_right = 423.738
+margin_bottom = 310.47
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+margin_left = 27.5298
+margin_top = 375.939
+margin_right = 113.53
+margin_bottom = 422.939
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+margin_left = 334.797
+margin_top = 382.555
+margin_right = 420.797
+margin_bottom = 429.555
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="score" type="Label" parent="."]
-margin_left = 121.766
-margin_top = 149.969
-margin_right = 266.766
-margin_bottom = 183.969
+margin_left = 122.766
+margin_top = 143.969
+margin_right = 267.766
+margin_bottom = 177.969
 custom_fonts/font = SubResource( 1 )
 text = "FINAL SCORE"
 __meta__ = {
@@ -74,10 +168,10 @@ __meta__ = {
 }
 
 [node name="300x" type="Label" parent="."]
-margin_left = 117.951
-margin_top = 249.081
-margin_right = 262.951
-margin_bottom = 283.081
+margin_left = 123.922
+margin_top = 268.32
+margin_right = 268.922
+margin_bottom = 302.32
 custom_fonts/font = SubResource( 1 )
 text = "FINAL SCORE"
 __meta__ = {
@@ -85,10 +179,10 @@ __meta__ = {
 }
 
 [node name="100x" type="Label" parent="."]
-margin_left = 367.746
-margin_top = 251.524
-margin_right = 512.746
-margin_bottom = 285.524
+margin_left = 450.746
+margin_top = 271.524
+margin_right = 595.746
+margin_bottom = 305.524
 custom_fonts/font = SubResource( 1 )
 text = "FINAL SCORE"
 __meta__ = {
@@ -96,10 +190,10 @@ __meta__ = {
 }
 
 [node name="50x" type="Label" parent="."]
-margin_left = 103.032
-margin_top = 343.749
-margin_right = 248.032
-margin_bottom = 377.749
+margin_left = 121.553
+margin_top = 382.371
+margin_right = 266.553
+margin_bottom = 416.371
 custom_fonts/font = SubResource( 1 )
 text = "FINAL SCORE"
 __meta__ = {
@@ -140,10 +234,10 @@ __meta__ = {
 }
 
 [node name="missx" type="Label" parent="."]
-margin_left = 345.867
-margin_top = 344.563
-margin_right = 490.867
-margin_bottom = 378.563
+margin_left = 450.473
+margin_top = 390.533
+margin_right = 595.473
+margin_bottom = 424.533
 custom_fonts/font = SubResource( 1 )
 text = "FINAL SCORE"
 __meta__ = {
@@ -151,10 +245,10 @@ __meta__ = {
 }
 
 [node name="combo" type="Label" parent="."]
-margin_left = 51.0
-margin_top = 509.0
-margin_right = 129.0
-margin_bottom = 543.0
+margin_left = 24.9359
+margin_top = 555.427
+margin_right = 102.936
+margin_bottom = 589.427
 custom_fonts/font = SubResource( 1 )
 text = "combo"
 __meta__ = {
@@ -162,10 +256,10 @@ __meta__ = {
 }
 
 [node name="acc" type="Label" parent="."]
-margin_left = 293.0
-margin_top = 508.0
-margin_right = 331.0
-margin_bottom = 542.0
+margin_left = 338.612
+margin_top = 556.87
+margin_right = 376.612
+margin_bottom = 590.87
 custom_fonts/font = SubResource( 1 )
 text = "acc"
 __meta__ = {
@@ -184,8 +278,9 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="song_select_btn"]
-position = Vector2( 119.162, 0.773743 )
+position = Vector2( 106.162, 17.7736 )
 frames = SubResource( 3 )
+frame = 45
 playing = true
 
 [node name="try_again_btn" type="Button" parent="."]
@@ -201,19 +296,19 @@ __meta__ = {
 }
 
 [node name="hit0" type="Sprite" parent="."]
-position = Vector2( 321.538, 360.136 )
+position = Vector2( 377.267, 404.719 )
 texture = ExtResource( 9 )
 
 [node name="hit50" type="Sprite" parent="."]
-position = Vector2( 62.0511, 360.871 )
+position = Vector2( 64.7048, 402.666 )
 texture = ExtResource( 7 )
 
 [node name="hit100" type="Sprite" parent="."]
-position = Vector2( 323.743, 266.044 )
+position = Vector2( 382.743, 290.044 )
 texture = ExtResource( 10 )
 
 [node name="hit300" type="Sprite" parent="."]
-position = Vector2( 67.1967, 263.104 )
+position = Vector2( 69.187, 288.314 )
 texture = ExtResource( 8 )
 
 [node name="back" type="AudioStreamPlayer" parent="."]

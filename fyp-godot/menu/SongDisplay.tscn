@@ -2,7 +2,7 @@
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/SongDisplay.gd" type="Script" id=2]
-[ext_resource path="res://skin/menu-button-background@2x.png" type="Texture" id=3]
+[ext_resource path="res://skin/skin new/menu-button-background@2x.png" type="Texture" id=3]
 [ext_resource path="res://skin/menuhit.wav" type="AudioStream" id=4]
 [ext_resource path="res://skin/menuclick.wav" type="AudioStream" id=5]
 
@@ -34,10 +34,10 @@ __meta__ = {
 [node name="details" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 34.0
-margin_top = -7.0
-margin_right = 34.0
-margin_bottom = -15.0
+margin_left = 41.0
+margin_top = -2.0
+margin_right = 10.0
+margin_bottom = -10.0
 mouse_filter = 2
 alignment = 2
 __meta__ = {
@@ -45,7 +45,7 @@ __meta__ = {
 }
 
 [node name="SongName" type="Label" parent="details"]
-margin_right = 500.0
+margin_right = 469.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 text = "Song Name that may or may not be very long"
@@ -56,7 +56,7 @@ __meta__ = {
 
 [node name="Artist" type="Label" parent="details"]
 margin_top = 32.0
-margin_right = 500.0
+margin_right = 469.0
 margin_bottom = 60.0
 custom_fonts/font = SubResource( 1 )
 text = "Artist Name that may or may not be very long"
@@ -64,7 +64,7 @@ autowrap = true
 
 [node name="Creator" type="Label" parent="details"]
 margin_top = 64.0
-margin_right = 500.0
+margin_right = 469.0
 margin_bottom = 92.0
 custom_fonts/font = SubResource( 1 )
 text = "Map Creator"
@@ -73,8 +73,8 @@ autowrap = true
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.901961, 0.756863, 0.65098, 1 )
 show_behind_parent = true
-position = Vector2( 366.476, 46.6333 )
-scale = Vector2( 0.480461, 0.504815 )
+position = Vector2( 356.476, 54.8233 )
+scale = Vector2( 0.480461, 0.545495 )
 texture = ExtResource( 3 )
 
 [node name="sound" type="AudioStreamPlayer" parent="."]

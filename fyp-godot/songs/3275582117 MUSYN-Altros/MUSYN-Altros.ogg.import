@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/MUSYN-Altros.ogg-1c59b3c8b78b9c5e7097e2a5db2c33c6.oggstr"
+
+[deps]
+
+source_file="res://songs/3275582117 MUSYN-Altros/MUSYN-Altros.ogg"
+dest_files=[ "res://.import/MUSYN-Altros.ogg-1c59b3c8b78b9c5e7097e2a5db2c33c6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

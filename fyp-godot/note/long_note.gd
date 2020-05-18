@@ -56,8 +56,10 @@ func hold_anims(play):
 func contHit():
 	ui.hit_continued_feedback(accuracy)
 	
-func hit(_is_miss = false):
+func hit(is_miss = false):
 	$MeshInstance.hide()
 	is_hit = true
+	if is_miss and $note_beam != null:
+		$note_beam/MeshInstance.hide()
 	ui.hit_feedback(accuracy)
 	ui.add_score()

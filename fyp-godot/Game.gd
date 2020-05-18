@@ -25,7 +25,7 @@ var load_percent = 0
 
 func _ready():
 	load_game()
-		
+
 func load_game():
 	map_thread.start(self, "build_map", null, 1)
 	set_vars()

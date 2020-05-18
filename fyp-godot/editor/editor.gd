@@ -246,12 +246,10 @@ func scale_to(dir):
 	waveform_n.set_scale_ratio(scale_ratio)
 
 	cursor_playback.speed_scale = scale_ratio
-	
-	
+
 	window_scroll_size = cursor_slider.get_value() - d
 	pending_wscroll_update = true
 
-	
 	for t in tracks:
 		t.update_scale(scale_ratio)
 	

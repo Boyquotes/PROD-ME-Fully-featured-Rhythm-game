@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://note/long_note.gd" type="Script" id=1]
 [ext_resource path="res://note/note_beam.tscn" type="PackedScene" id=2]
 [ext_resource path="res://note/note_detail.tscn" type="PackedScene" id=3]
+[ext_resource path="res://note/note.png" type="Texture" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.95, 0.2, 0.4 )
@@ -14,16 +15,23 @@ extents = Vector3( 8.60774, 0.1, 6.79832 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 script = ExtResource( 1 )
 
+[node name="Note" type="Sprite3D" parent="."]
+transform = Transform( 0.38, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0.015, 0 )
+axis = 1
+texture = ExtResource( 4 )
+
 [node name="MeshInstance6" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00281709, 0.0216283, 0.00195301 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.021, 0 )
+visible = false
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="note_beam" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.129106 )
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0.2 )
 
 [node name="Area" type="Area" parent="."]
 transform = Transform( 0.05, 0, 0, 0, 1, 0, 0, 0, 0.025, 0, 0, 0 )

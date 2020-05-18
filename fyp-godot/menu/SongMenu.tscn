@@ -1,16 +1,74 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://theme/fonts/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/SongMenu.gd" type="Script" id=2]
 [ext_resource path="res://addons/gamejolt_api_v2/main.gd" type="Script" id=3]
 [ext_resource path="res://menu/bg_loop.gd" type="Script" id=4]
 [ext_resource path="res://menu/bg.webm" type="VideoStream" id=5]
-[ext_resource path="res://skin/selection-mode@2x.png" type="Texture" id=6]
-[ext_resource path="res://skin/menu-back@2x.png" type="Texture" id=7]
+[ext_resource path="res://skin/skin new/menu-back-45.png" type="Texture" id=6]
+[ext_resource path="res://skin/skin new/menu-back-46.png" type="Texture" id=7]
 [ext_resource path="res://visualiser_round.gd" type="Script" id=8]
 [ext_resource path="res://menu/MainMenu.shader" type="Shader" id=9]
 [ext_resource path="res://skin/menuclick.wav" type="AudioStream" id=10]
 [ext_resource path="res://skin/menuback.wav" type="AudioStream" id=11]
+[ext_resource path="res://skin/skin new/selection-mode@2x.png" type="Texture" id=12]
+[ext_resource path="res://skin/skin new/menu-back-0.png" type="Texture" id=13]
+[ext_resource path="res://skin/skin new/menu-back-15.png" type="Texture" id=14]
+[ext_resource path="res://skin/skin new/menu-back-11.png" type="Texture" id=15]
+[ext_resource path="res://skin/skin new/menu-back-16.png" type="Texture" id=16]
+[ext_resource path="res://skin/skin new/menu-back-22.png" type="Texture" id=17]
+[ext_resource path="res://skin/skin new/menu-back-21.png" type="Texture" id=18]
+[ext_resource path="res://skin/skin new/menu-back-8.png" type="Texture" id=19]
+[ext_resource path="res://skin/skin new/menu-back-23.png" type="Texture" id=20]
+[ext_resource path="res://skin/skin new/menu-back-26.png" type="Texture" id=21]
+[ext_resource path="res://skin/skin new/menu-back-27.png" type="Texture" id=22]
+[ext_resource path="res://skin/skin new/menu-back-28.png" type="Texture" id=23]
+[ext_resource path="res://skin/skin new/menu-back-12.png" type="Texture" id=24]
+[ext_resource path="res://skin/skin new/menu-back-29.png" type="Texture" id=25]
+[ext_resource path="res://skin/skin new/menu-back-31.png" type="Texture" id=26]
+[ext_resource path="res://skin/skin new/menu-back-14.png" type="Texture" id=27]
+[ext_resource path="res://skin/skin new/menu-back-18.png" type="Texture" id=28]
+[ext_resource path="res://skin/skin new/menu-back-30.png" type="Texture" id=29]
+[ext_resource path="res://skin/skin new/menu-back-1.png" type="Texture" id=30]
+[ext_resource path="res://skin/skin new/menu-back-2.png" type="Texture" id=31]
+[ext_resource path="res://skin/skin new/menu-back-5.png" type="Texture" id=32]
+[ext_resource path="res://skin/skin new/menu-back-4.png" type="Texture" id=33]
+[ext_resource path="res://skin/skin new/menu-back-9.png" type="Texture" id=34]
+[ext_resource path="res://skin/skin new/menu-back-13.png" type="Texture" id=35]
+[ext_resource path="res://skin/skin new/menu-back-19.png" type="Texture" id=36]
+[ext_resource path="res://skin/skin new/menu-back-17.png" type="Texture" id=37]
+[ext_resource path="res://skin/skin new/menu-back-7.png" type="Texture" id=38]
+[ext_resource path="res://skin/skin new/menu-back-20.png" type="Texture" id=39]
+[ext_resource path="res://skin/skin new/menu-back-10.png" type="Texture" id=40]
+[ext_resource path="res://skin/skin new/menu-back-24.png" type="Texture" id=41]
+[ext_resource path="res://skin/skin new/menu-back-25.png" type="Texture" id=42]
+[ext_resource path="res://skin/skin new/menu-back-6.png" type="Texture" id=43]
+[ext_resource path="res://skin/skin new/menu-back-3.png" type="Texture" id=44]
+[ext_resource path="res://skin/skin new/menu-back-43.png" type="Texture" id=45]
+[ext_resource path="res://skin/skin new/menu-back-44.png" type="Texture" id=46]
+[ext_resource path="res://skin/skin new/menu-back-32.png" type="Texture" id=47]
+[ext_resource path="res://skin/skin new/menu-back-41.png" type="Texture" id=48]
+[ext_resource path="res://skin/skin new/menu-back-34.png" type="Texture" id=49]
+[ext_resource path="res://skin/skin new/menu-back-38.png" type="Texture" id=50]
+[ext_resource path="res://skin/skin new/menu-back-39.png" type="Texture" id=51]
+[ext_resource path="res://skin/skin new/menu-back-37.png" type="Texture" id=52]
+[ext_resource path="res://skin/skin new/menu-back-36.png" type="Texture" id=53]
+[ext_resource path="res://skin/skin new/menu-back-33.png" type="Texture" id=54]
+[ext_resource path="res://skin/skin new/menu-back-35.png" type="Texture" id=55]
+[ext_resource path="res://skin/skin new/menu-back-42.png" type="Texture" id=56]
+[ext_resource path="res://skin/skin new/menu-back-40.png" type="Texture" id=57]
+[ext_resource path="res://skin/skin new/menu-back-55.png" type="Texture" id=58]
+[ext_resource path="res://skin/skin new/menu-back-56.png" type="Texture" id=59]
+[ext_resource path="res://skin/skin new/menu-back-57.png" type="Texture" id=60]
+[ext_resource path="res://skin/skin new/menu-back-50.png" type="Texture" id=61]
+[ext_resource path="res://skin/skin new/menu-back-53.png" type="Texture" id=62]
+[ext_resource path="res://skin/skin new/menu-back-51.png" type="Texture" id=63]
+[ext_resource path="res://skin/skin new/menu-back-52.png" type="Texture" id=64]
+[ext_resource path="res://skin/skin new/menu-back-58.png" type="Texture" id=65]
+[ext_resource path="res://skin/skin new/menu-back-54.png" type="Texture" id=66]
+[ext_resource path="res://skin/skin new/menu-back-49.png" type="Texture" id=67]
+[ext_resource path="res://skin/skin new/menu-back-48.png" type="Texture" id=68]
+[ext_resource path="res://skin/skin new/menu-back-47.png" type="Texture" id=69]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -24,7 +82,15 @@ font_data = ExtResource( 1 )
 size = 64
 font_data = ExtResource( 1 )
 
-[sub_resource type="Environment" id=4]
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 44 ), ExtResource( 33 ), ExtResource( 32 ), ExtResource( 43 ), ExtResource( 38 ), ExtResource( 19 ), ExtResource( 34 ), ExtResource( 40 ), ExtResource( 15 ), ExtResource( 24 ), ExtResource( 35 ), ExtResource( 27 ), ExtResource( 14 ), ExtResource( 16 ), ExtResource( 37 ), ExtResource( 28 ), ExtResource( 36 ), ExtResource( 39 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 20 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 25 ), ExtResource( 29 ), ExtResource( 26 ), ExtResource( 47 ), ExtResource( 54 ), ExtResource( 49 ), ExtResource( 55 ), ExtResource( 53 ), ExtResource( 52 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 57 ), ExtResource( 48 ), ExtResource( 56 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 69 ), ExtResource( 68 ), ExtResource( 67 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 62 ), ExtResource( 66 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 65 ) ],
+"loop": true,
+"name": "default",
+"speed": 24.0
+} ]
+
+[sub_resource type="Environment" id=5]
 background_mode = 4
 tonemap_mode = 2
 adjustment_enabled = true
@@ -32,7 +98,7 @@ adjustment_brightness = 0.89
 adjustment_contrast = 1.18
 adjustment_saturation = 1.29
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 38
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -99,8 +165,8 @@ is_inverted = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -420.0
-margin_top = 118.0
-margin_bottom = 720.0
+margin_top = 56.0
+margin_bottom = 631.0
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -149,9 +215,9 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 539.708, 678.14 )
+position = Vector2( 745.124, 673.059 )
 scale = Vector2( 0.533065, 0.533065 )
-texture = ExtResource( 6 )
+texture = ExtResource( 12 )
 
 [node name="ButtonCont" type="VBoxContainer" parent="."]
 anchor_top = 1.0
@@ -166,16 +232,22 @@ __meta__ = {
 
 [node name="back_btn" type="Button" parent="ButtonCont"]
 margin_right = 236.0
-margin_bottom = 96.0
+margin_bottom = 94.0
 custom_fonts/font = SubResource( 3 )
-icon = ExtResource( 7 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ButtonCont"]
+position = Vector2( 141.407, 21.2246 )
+scale = Vector2( 1.24734, 1.14155 )
+frames = SubResource( 4 )
+frame = 4
+playing = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 4 )
+environment = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -184,7 +256,7 @@ margin_left = 577.0
 margin_top = 648.0
 margin_right = 855.0
 margin_bottom = 767.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "PLayerName
 "
 __meta__ = {

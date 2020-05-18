@@ -17,6 +17,7 @@ var gate
 onready var ui = get_tree().get_root().get_node("Game").get_node("ui_node")
 
 func _process(delta):
+	if not gate or (gate.note_hit != null and gate.note_hit !=self): return
 	_on_process(delta)
 	
 func _on_process(_delta):
@@ -41,6 +42,7 @@ func hit(is_miss = false):
 	ui.add_score()
 
 func set_color(color):
+	$Note.modulate = Color(color)
 	var material = SpatialMaterial.new() 
 	$MeshInstance.get_surface_material(0)
 	material.albedo_color = color

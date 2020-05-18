@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://theme/editor_theme.tres" type="Theme" id=1]
 [ext_resource path="res://editor/editor.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://editor/start_pos_input.tscn" type="PackedScene" id=4]
 [ext_resource path="res://editor/bpm_input.tscn" type="PackedScene" id=5]
 [ext_resource path="res://AudioWaveform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://audio.ogg" type="AudioStream" id=7]
 [ext_resource path="res://editor/Cursor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://editor/ZoomBtn.tscn" type="PackedScene" id=9]
 [ext_resource path="res://editor/MapInfo.tscn" type="PackedScene" id=10]
@@ -295,7 +294,6 @@ __meta__ = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
 
 [node name="Exit_btn" type="Button" parent="."]
 anchor_top = 1.0

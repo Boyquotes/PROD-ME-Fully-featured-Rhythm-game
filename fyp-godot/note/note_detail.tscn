@@ -1,16 +1,16 @@
 [gd_scene load_steps=10 format=2]
 
-[sub_resource type="PlaneMesh" id=6]
+[sub_resource type="PlaneMesh" id=1]
 size = Vector2( 0.4, 0.4 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.524725, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0.560784, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
 params_blend_mode = 1
 albedo_color = Color( 0, 0, 0, 1 )
@@ -19,16 +19,16 @@ emission = Color( 0, 0, 0, 1 )
 emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
-emission_texture = SubResource( 8 )
+emission_texture = SubResource( 3 )
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0.423077, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 0.535156, 0.535156, 0.535156, 1 )
 
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=7]
 flags_transparent = true
 params_blend_mode = 3
 albedo_color = Color( 0, 0, 0, 1 )
@@ -37,37 +37,37 @@ emission = Color( 0, 0, 0, 1 )
 emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
-emission_texture = SubResource( 11 )
+emission_texture = SubResource( 6 )
 
-[sub_resource type="PlaneMesh" id=13]
+[sub_resource type="PlaneMesh" id=8]
 size = Vector2( 0.4, 0.2 )
 
-[sub_resource type="SpatialMaterial" id=14]
+[sub_resource type="SpatialMaterial" id=9]
 albedo_color = Color( 0.45098, 0.45098, 0.45098, 1 )
 
 [node name="MeshInstance6" type="MeshInstance"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.253, 0.102, 0.003 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 9 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -0.5, 0, 1, -2.18557e-08, -0.25, 0.002, 0.203 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 9 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.280475, 0.103773, 0.00329533 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 12 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="."]
 transform = Transform( -1.6455e-07, 1, 4.41485e-08, 0, -4.37114e-08, 1.01, 1.01, 1.62921e-07, 7.1927e-15, 0.478385, 0.00101453, 0.0018556 )
-mesh = SubResource( 13 )
-material/0 = SubResource( 14 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -0.5, 0, 1, -8.14603e-08, 0.278337, 0.004, 0.203453 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 12 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )

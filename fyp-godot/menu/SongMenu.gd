@@ -98,7 +98,7 @@ func _on_GameJoltAPI_api_scores_fetched(data):
 		
 func fetch_api():
 	var api = get_node("GameJoltAPI")
-	api.fetch_scores()
+	api.fetch_scores('','',100, '')
 	
 func set_scores(data):
 	scores = JSON.parse(data).get_result()

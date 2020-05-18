@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DEMO-DEMO.ogg-a26a578971170c004bafa27ea61064d2.oggstr"
+
+[deps]
+
+source_file="res://songs/182567350 DEMO-DEMO/DEMO-DEMO.ogg"
+dest_files=[ "res://.import/DEMO-DEMO.ogg-a26a578971170c004bafa27ea61064d2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
