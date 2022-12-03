@@ -1,7 +1,5 @@
 A fully featured guitar hero style 4 button rhythm game. The game was made using the godot game engine using godot script. Most assets are used from an old osu skin I made and are placeholder until I know a full theme I would like for this game. The game features an in game beatmap editor to edit or create your own maps to play. It uses .ogg files and maps are stored using .json files.
 
-The full project report and development track can be viewed here: https://docs.google.com/document/d/1nzMNtMWzvLU0q9Apvl1LKMzshakwllOnT7LeeKZOGBI/edit?usp=sharing
-
 # Features
 
 - User leaderboards using gamejolt API
